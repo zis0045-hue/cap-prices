@@ -1,0 +1,103 @@
+{
+  "updated": "2026-05-21T03:19:28.126902Z",
+  "data": [
+    {
+      "ticker": "GEV",
+      "price": 1024.52,
+      "prevClose": 1011.8,
+      "date": "2026-05-20",
+      "currency": "USD"
+    },
+    {
+      "ticker": "CRDO",
+      "price": 182.98,
+      "prevClose": 168.99,
+      "date": "2026-05-20",
+      "currency": "USD"
+    },
+    {
+      "ticker": "AVGO",
+      "price": 417.76,
+      "prevClose": 411.07,
+      "date": "2026-05-20",
+      "currency": "USD"
+    },
+    {
+      "ticker": "DELL",
+      "price": 242.93,
+      "prevClose": 235.26,
+      "date": "2026-05-20",
+      "currency": "USD"
+    },
+    {
+      "ticker": "BE",
+      "price": 282.31,
+      "prevClose": 261.34,
+      "date": "2026-05-20",
+      "currency": "USD"
+    },
+    {
+      "ticker": "INTC",
+      "price": 118.96,
+      "prevClose": 110.8,
+      "date": "2026-05-20",
+      "currency": "USD"
+    },
+    {
+      "ticker": "010060",
+      "price": 280000,
+      "prevClose": 277500,
+      "date": "2026-05-21",
+      "currency": "KRW"
+    },
+    {
+      "ticker": "000660",
+      "price": 1937000,
+      "prevClose": 1745000,
+      "date": "2026-05-21",
+      "currency": "KRW"
+    },
+    {
+      "ticker": "005930",
+      "price": 293500,
+      "prevClose": 276000,
+      "date": "2026-05-21",
+      "currency": "KRW"
+    },
+    {
+      "ticker": "017670",
+      "price": 101600,
+      "prevClose": 98100,
+      "date": "2026-05-21",
+      "currency": "KRW"
+    },
+    {
+      "ticker": "487240",
+      "price": 53425,
+      "prevClose": 49115,
+      "date": "2026-05-21",
+      "currency": "KRW"
+    },
+    {
+      "ticker": "329180",
+      "price": 670000,
+      "prevClose": 636000,
+      "date": "2026-05-21",
+      "currency": "KRW"
+    },
+    {
+      "ticker": "006400",
+      "price": 606000,
+      "prevClose": 570000,
+      "date": "2026-05-21",
+      "currency": "KRW"
+    },
+    {
+      "ticker": "009150",
+      "price": 1189000,
+      "prevClose": 1061000,
+      "date": "2026-05-21",
+      "currency": "KRW"
+    }
+  ]
+}
