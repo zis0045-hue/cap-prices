@@ -1,5 +1,5 @@
 {
-  "updated": "2026-05-21T03:19:28.126902Z",
+  "updated": "2026-05-21T10:27:57.709397Z",
   "data": [
     {
       "ticker": "GEV",
@@ -45,56 +45,56 @@
     },
     {
       "ticker": "010060",
-      "price": 280000,
+      "price": 280500,
       "prevClose": 277500,
       "date": "2026-05-21",
       "currency": "KRW"
     },
     {
       "ticker": "000660",
-      "price": 1937000,
+      "price": 1940000,
       "prevClose": 1745000,
       "date": "2026-05-21",
       "currency": "KRW"
     },
     {
       "ticker": "005930",
-      "price": 293500,
+      "price": 299500,
       "prevClose": 276000,
       "date": "2026-05-21",
       "currency": "KRW"
     },
     {
       "ticker": "017670",
-      "price": 101600,
+      "price": 102800,
       "prevClose": 98100,
       "date": "2026-05-21",
       "currency": "KRW"
     },
     {
       "ticker": "487240",
-      "price": 53425,
+      "price": 54260,
       "prevClose": 49115,
       "date": "2026-05-21",
       "currency": "KRW"
     },
     {
       "ticker": "329180",
-      "price": 670000,
+      "price": 672000,
       "prevClose": 636000,
       "date": "2026-05-21",
       "currency": "KRW"
     },
     {
       "ticker": "006400",
-      "price": 606000,
+      "price": 616000,
       "prevClose": 570000,
       "date": "2026-05-21",
       "currency": "KRW"
     },
     {
       "ticker": "009150",
-      "price": 1189000,
+      "price": 1204000,
       "prevClose": 1061000,
       "date": "2026-05-21",
       "currency": "KRW"
