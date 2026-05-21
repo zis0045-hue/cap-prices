@@ -1,46 +1,46 @@
 {
-  "updated": "2026-05-21T10:27:57.709397Z",
+  "updated": "2026-05-21T22:25:03.142615Z",
   "data": [
     {
       "ticker": "GEV",
-      "price": 1024.52,
-      "prevClose": 1011.8,
-      "date": "2026-05-20",
+      "price": 1043.82,
+      "prevClose": 1024.52,
+      "date": "2026-05-21",
       "currency": "USD"
     },
     {
       "ticker": "CRDO",
-      "price": 182.98,
-      "prevClose": 168.99,
-      "date": "2026-05-20",
+      "price": 193.39,
+      "prevClose": 182.98,
+      "date": "2026-05-21",
       "currency": "USD"
     },
     {
       "ticker": "AVGO",
-      "price": 417.76,
-      "prevClose": 411.07,
-      "date": "2026-05-20",
+      "price": 414.57,
+      "prevClose": 417.76,
+      "date": "2026-05-21",
       "currency": "USD"
     },
     {
       "ticker": "DELL",
-      "price": 242.93,
-      "prevClose": 235.26,
-      "date": "2026-05-20",
+      "price": 252.8,
+      "prevClose": 242.93,
+      "date": "2026-05-21",
       "currency": "USD"
     },
     {
       "ticker": "BE",
-      "price": 282.31,
-      "prevClose": 261.34,
-      "date": "2026-05-20",
+      "price": 307.88,
+      "prevClose": 282.31,
+      "date": "2026-05-21",
       "currency": "USD"
     },
     {
       "ticker": "INTC",
-      "price": 118.96,
-      "prevClose": 110.8,
-      "date": "2026-05-20",
+      "price": 118.5,
+      "prevClose": 118.96,
+      "date": "2026-05-21",
       "currency": "USD"
     },
     {
