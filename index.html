@@ -21,7 +21,7 @@
 <script type="text/babel">
 const { useState, useEffect, useCallback, useMemo } = React;
 
-const SEED = {
+const DEFAULT_SEED = {
   us: [
     { t: "GEV",  n: "GE Vernova",   tag: "B·T1",    entry: [[1000,1050],[850,950]], chase: 1200, avg: null,   stop: 900,   qty: 0,   note: "1차 타점 내·재예약 대기" },
     { t: "CRDO", n: "Credo",        tag: "B·T2",    entry: [[160,170],[140,150]],   chase: 200,  avg: null,   stop: null,  qty: 0,   note: "어닝 6/1" },
@@ -83,8 +83,9 @@ function CapTerminal() {
   const [draft, setDraft] = useState({ price: "", prev: "" });
   const [bulk, setBulk] = useState("");
   const [showBulk, setShowBulk] = useState(false);
+  const [config, setConfig] = useState(DEFAULT_SEED);
 
-  // localStorage 복원
+  // localStorage 복원 + config.json fetch
   useEffect(() => {
     try {
       const saved = JSON.parse(localStorage.getItem("cap-prices"));
@@ -93,6 +94,22 @@ function CapTerminal() {
         setLastFetch(saved.lastFetch || null);
       }
     } catch (e) {}
+    // config.json 로드 (종목 설정)
+    fetch("./config.json?t=" + Date.now(), { cache: "no-store" })
+      .then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
+      .then(cfg => {
+        if (cfg.us && cfg.kr) {
+          setConfig(cfg);
+          try { localStorage.setItem("cap-config", JSON.stringify(cfg)); } catch (e) {}
+        }
+      })
+      .catch(() => {
+        // fetch 실패 시 localStorage 캐시 폴백
+        try {
+          const cached = JSON.parse(localStorage.getItem("cap-config"));
+          if (cached?.us && cached?.kr) setConfig(cached);
+        } catch (e) {}
+      });
   }, []);
 
   const persist = useCallback((next, lf) => {
@@ -137,7 +154,7 @@ function CapTerminal() {
 
   const summary = useMemo(() => {
     let act = 0, warn = 0, krPnL = 0, usPnL = 0;
-    [...SEED.us.map((s) => ({ ...s, kr: false })), ...SEED.kr.map((s) => ({ ...s, kr: true }))].forEach((s) => {
+    [...config.us.map((s) => ({ ...s, kr: false })), ...config.kr.map((s) => ({ ...s, kr: true }))].forEach((s) => {
       const price = prices[s.t]?.price;
       if (price == null) return;
       const sig = signal(s, price);
@@ -149,7 +166,7 @@ function CapTerminal() {
       }
     });
     return { act, warn, krPnL, usPnL };
-  }, [prices]);
+  }, [prices, config]);
 
   function applyBulk() {
     const raw = bulk.trim();
@@ -321,8 +338,8 @@ function CapTerminal() {
           ))}
         </div>
 
-        <Section title="US Watchlist" flag="\u{1F1FA}\u{1F1F8}" stocks={SEED.us} kr={false} />
-        <Section title="KR Watchlist" flag="\u{1F1F0}\u{1F1F7}" stocks={SEED.kr} kr={true} />
+        <Section title="US Watchlist" flag="\u{1F1FA}\u{1F1F8}" stocks={config.us} kr={false} />
+        <Section title="KR Watchlist" flag="\u{1F1F0}\u{1F1F7}" stocks={config.kr} kr={true} />
 
         <p style={{ fontSize: 10, color: "#3f4757", textAlign: "center", marginTop: 20, fontFamily: "'IBM Plex Sans KR',sans-serif", lineHeight: 1.6 }}>
           ↻ GitHub Actions 자동 수집 (평일 한·미 장마감 후) · 실패 시 📋 수동 입력<br />
