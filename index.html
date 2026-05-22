@@ -23,23 +23,22 @@ const { useState, useEffect, useCallback, useMemo } = React;
 
 const DEFAULT_SEED = {
   us: [
-    { t: "GEV",  n: "GE Vernova",   tag: "B·T1",    entry: [[1000,1050],[850,950]], chase: 1200, avg: null,   stop: 900,   qty: 0,   note: "1차 타점 내·재예약 대기" },
-    { t: "CRDO", n: "Credo",        tag: "B·T2",    entry: [[160,170],[140,150]],   chase: 200,  avg: null,   stop: null,  qty: 0,   note: "어닝 6/1" },
-    { t: "AVGO", n: "Broadcom",     tag: "B등급",    entry: null,                    chase: null, avg: 419,    stop: 356,   qty: 5,   note: "6월 500만 확대" },
-    { t: "DELL", n: "Dell",         tag: "워치",     entry: [[220,235],[195,210],[175,190]], chase: 245, avg: null, stop: null, qty: 0, note: "어닝 5/28" },
-    { t: "BE",   n: "Bloom Energy", tag: "T3",       entry: null,                    chase: null, avg: null,   stop: null,  qty: 0,   note: "Lottery 관찰" },
-    { t: "INTC", n: "Intel",        tag: "워치후보", entry: null,                    chase: null, avg: null,   stop: null,  qty: 0,   note: "PC 부활 가설" },
+    { t: "GEV",  n: "GE Vernova",   cat: "entry", tag: "B·T1",    entry: [[1000,1050],[850,950]], chase: 1200, avg: null,   stop: 900,   qty: 0,   note: "1차 타점 내·재예약 대기" },
+    { t: "CRDO", n: "Credo",        cat: "entry", tag: "B·T2",    entry: [[160,170],[140,150]],   chase: 200,  avg: null,   stop: null,  qty: 0,   note: "어닝 6/1" },
+    { t: "AVGO", n: "Broadcom",     cat: "holdB", tag: "B등급",    entry: null,                    chase: null, avg: 419,    stop: 356,   qty: 5,   note: "6월 500만 확대" },
+    { t: "DELL", n: "Dell",         cat: "entry", tag: "워치",     entry: [[220,235],[195,210],[175,190]], chase: 245, avg: null, stop: null, qty: 0, note: "어닝 5/28" },
+    { t: "BE",   n: "Bloom Energy", cat: "entry", tag: "T3",       entry: null,                    chase: null, avg: null,   stop: null,  qty: 0,   note: "Lottery 관찰" },
+    { t: "INTC", n: "Intel",        cat: "entry", tag: "워치후보", entry: null,                    chase: null, avg: null,   stop: null,  qty: 0,   note: "PC 부활 가설" },
   ],
   kr: [
-    { t: "347700", n: "스피어",            tag: "스윙",    entry: null, chase: null, avg: 41000,  stop: 34850, qty: 61,  note: "\u{1F6A8} S-1 셀온·손절선 점검" },
-    { t: "010060", n: "OCI홀딩스",         tag: "B등급",   entry: null, chase: null, avg: 327000, stop: null,  qty: 7,   note: "Section 232 익절" },
-    { t: "000660", n: "SK하이닉스",        tag: "사실상A", entry: null, chase: null, avg: null,   stop: null,  qty: 12,  note: "5/20 2주 익절(14→12)" },
-    { t: "005930", n: "삼성전자",          tag: "보유",    entry: null, chase: null, avg: null,   stop: null,  qty: 20,  note: "" },
-    { t: "017670", n: "SKT",               tag: "A등급",   entry: null, chase: null, avg: 87532,  stop: null,  qty: 92,  note: "DCA 1주/일" },
-    { t: "487240", n: "KODEX AI전력핵심설비", tag: "ETF",  entry: null, chase: null, avg: 32676,  stop: null,  qty: 331, note: "DCA 1주/일(일시1주)" },
-    { t: "329180", n: "HD현대중공업",      tag: "워치·T1", entry: [[640000,660000],[590000,610000]], chase: 700000, avg: null, stop: null, qty: 0, note: "진입 보류" },
-    { t: "006400", n: "삼성SDI",           tag: "T2",      entry: null, chase: null, avg: null,   stop: null,  qty: 0,   note: "" },
-    { t: "009150", n: "삼성전기",          tag: "T2",      entry: null, chase: null, avg: null,   stop: null,  qty: 0,   note: "6월 로테이션" },
+    { t: "010060", n: "OCI홀딩스",         cat: "holdB", tag: "B등급",   entry: null, chase: null, avg: 327000, stop: null,  qty: 7,   note: "1Q26 실적 갈림길·홀드" },
+    { t: "000660", n: "SK하이닉스",        cat: "core",  tag: "사실상A", entry: null, chase: null, avg: null,   stop: null,  qty: 12,  note: "DCA 가격제한 185만" },
+    { t: "005930", n: "삼성전자",          cat: "core",  tag: "보유",    entry: null, chase: null, avg: null,   stop: null,  qty: 20,  note: "" },
+    { t: "017670", n: "SKT",               cat: "core",  tag: "A등급",   entry: null, chase: null, avg: 87532,  stop: null,  qty: 92,  note: "DCA 1주/일" },
+    { t: "487240", n: "KODEX AI전력핵심설비", cat: "core", tag: "ETF",  entry: null, chase: null, avg: 32676,  stop: null,  qty: 331, note: "DCA 1주/일(일시1주)" },
+    { t: "329180", n: "HD현대중공업",      cat: "entry", tag: "워치·T1", entry: [[640000,660000],[590000,610000]], chase: 700000, avg: null, stop: null, qty: 0, note: "진입 보류" },
+    { t: "006400", n: "삼성SDI",           cat: "entry", tag: "T2",      entry: null, chase: null, avg: null,   stop: null,  qty: 0,   note: "" },
+    { t: "009150", n: "삼성전기",          cat: "entry", tag: "T2",      entry: null, chase: null, avg: null,   stop: null,  qty: 0,   note: "6월 로테이션" },
   ],
 };
 
@@ -84,6 +83,7 @@ function CapTerminal() {
   const [bulk, setBulk] = useState("");
   const [showBulk, setShowBulk] = useState(false);
   const [config, setConfig] = useState(DEFAULT_SEED);
+  const [coreOpen, setCoreOpen] = useState(false);
 
   // localStorage 복원 + config.json fetch
   useEffect(() => {
@@ -152,21 +152,54 @@ function CapTerminal() {
   // 앱 열 때 1회 자동 갱신
   useEffect(() => { autoRefresh(); }, []);
 
+  // 전체 종목을 하나로 합치고 cat으로 분류
+  const allStocks = useMemo(() => {
+    const merged = [
+      ...config.us.map((s) => ({ ...s, kr: false })),
+      ...config.kr.map((s) => ({ ...s, kr: true })),
+    ];
+    return merged;
+  }, [config]);
+
+  // cat별 종목 분류 + 진입후보 정렬(타점도달 우선)
+  const grouped = useMemo(() => {
+    const byCat = { entry: [], holdB: [], core: [] };
+    allStocks.forEach((s) => {
+      const cat = s.cat || "entry";
+      if (byCat[cat]) byCat[cat].push(s);
+      else byCat.entry.push(s);
+    });
+    // 진입후보 정렬: ✅(타점도달) → 📋(대기) → 나머지
+    const sigPriority = (s) => {
+      const price = prices[s.t]?.price;
+      const sig = signal(s, price);
+      if (sig.mark === "✅") return 0;
+      if (sig.mark === "⛔") return 1;
+      if (sig.mark === "\u{1F4CB}") return 2;
+      return 3;
+    };
+    byCat.entry.sort((a, b) => sigPriority(a) - sigPriority(b));
+    return byCat;
+  }, [allStocks, prices]);
+
   const summary = useMemo(() => {
-    let act = 0, warn = 0, krPnL = 0, usPnL = 0;
-    [...config.us.map((s) => ({ ...s, kr: false })), ...config.kr.map((s) => ({ ...s, kr: true }))].forEach((s) => {
+    let act = 0, warn = 0, krPnL = 0, usPnL = 0, krCost = 0, usCost = 0, krVal = 0, usVal = 0;
+    allStocks.forEach((s) => {
       const price = prices[s.t]?.price;
       if (price == null) return;
       const sig = signal(s, price);
       if (sig.mark === "✅") act++;
       if (sig.mark === "⛔") warn++;
       if (s.qty > 0 && s.avg) {
-        const pnl = (price - s.avg) * s.qty;
-        if (s.kr) krPnL += pnl; else usPnL += pnl;
+        const cost = s.avg * s.qty;
+        const val = price * s.qty;
+        const pnl = val - cost;
+        if (s.kr) { krPnL += pnl; krCost += cost; krVal += val; }
+        else { usPnL += pnl; usCost += cost; usVal += val; }
       }
     });
-    return { act, warn, krPnL, usPnL };
-  }, [prices, config]);
+    return { act, warn, krPnL, usPnL, krCost, usCost, krVal, usVal };
+  }, [prices, allStocks]);
 
   function applyBulk() {
     const raw = bulk.trim();
@@ -208,76 +241,84 @@ function CapTerminal() {
     setPrices(next); persist(next); setEditing(null); setDraft({ price: "", prev: "" });
   }
 
-  const Section = ({ title, flag, stocks, kr }) => (
-    <div style={{ marginBottom: 26 }}>
-      <div style={{ display: "flex", alignItems: "baseline", gap: 8, marginBottom: 10, paddingBottom: 6, borderBottom: "1px solid #1d2433" }}>
-        <span style={{ fontSize: 18 }}>{flag}</span>
-        <span style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 12, letterSpacing: 2, color: "#5b6677", textTransform: "uppercase" }}>{title}</span>
-      </div>
-      <div style={{ display: "grid", gap: 8 }}>
-        {stocks.map((s) => {
-          const d = prices[s.t];
-          const price = d?.price ?? null;
-          const chg = d?.prevClose ? ((price - d.prevClose) / d.prevClose) * 100 : null;
-          const sig = signal(s, price);
-          const chgColor = chg == null ? FLAT : chg > 0 ? UP : chg < 0 ? DOWN : FLAT;
-          return (
-            <div key={s.t} style={{ background: "#10151f", border: "1px solid #1a2130", borderLeft: `3px solid ${sig.color}`, borderRadius: 8, padding: "12px 14px" }}>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 10 }}>
-                <div style={{ minWidth: 0 }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: 8, flexWrap: "wrap" }}>
-                    <span style={{ fontFamily: "'IBM Plex Sans KR',sans-serif", fontWeight: 600, fontSize: 15, color: "#e9edf4" }}>{s.n}</span>
-                    <span style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 11, color: "#5b6677" }}>{s.t}</span>
-                    <span style={{ fontSize: 10, fontFamily: "'IBM Plex Sans KR',sans-serif", color: "#7c8aa0", background: "#1a2130", padding: "1px 7px", borderRadius: 10 }}>{s.tag}</span>
-                    {s.qty > 0 && <span style={{ fontSize: 10, fontFamily: "'IBM Plex Mono',monospace", color: "#8a93a6" }}>{s.qty}주</span>}
-                  </div>
-                  <div style={{ marginTop: 5, fontSize: 11, fontFamily: "'IBM Plex Sans KR',sans-serif", color: "#6b7689" }}>
-                    {s.avg && <span>평단 {fmt(s.avg, kr)} · </span>}
-                    {s.stop && <span style={{ color: "#b0556a" }}>손절 {fmt(s.stop, kr)} · </span>}
-                    {s.entry && <span>타점 {s.entry.map((e) => `${fmt(e[0], kr)}~${fmt(e[1], kr)}`).join(" / ")} · </span>}
-                    {s.chase && <span>추격✕ {fmt(s.chase, kr)} · </span>}
-                    {s.note && <span style={{ color: "#8590a3" }}>{s.note}</span>}
-                  </div>
-                </div>
-                <div style={{ textAlign: "right", flexShrink: 0 }}>
-                  <div style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 17, fontWeight: 600, color: price == null ? "#3f4757" : "#e9edf4" }}>
-                    {price == null ? "—" : fmt(price, kr)}
-                  </div>
-                  <div style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 12, color: chgColor }}>
-                    {chg == null ? "" : `${chg > 0 ? "+" : ""}${chg.toFixed(2)}%`}
-                  </div>
-                  {s.qty > 0 && s.avg && price != null && (
-                    <div style={{ fontSize: 10, fontFamily: "'IBM Plex Mono',monospace", color: price - s.avg >= 0 ? UP : DOWN, marginTop: 1 }}>
-                      {(price - s.avg) / s.avg >= 0 ? "+" : ""}{(((price - s.avg) / s.avg) * 100).toFixed(1)}% · {kr ? `${Math.round(((price - s.avg) * s.qty) / 10000)}만` : `$${Math.round((price - s.avg) * s.qty)}`}
-                    </div>
-                  )}
-                  {d?.manual && <div style={{ fontSize: 9, color: "#5b6677" }}>수동</div>}
-                </div>
-              </div>
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 8 }}>
-                <span style={{ fontSize: 11, fontFamily: "'IBM Plex Sans KR',sans-serif", color: sig.color, fontWeight: 500 }}>
-                  {sig.mark} {sig.label}
-                </span>
-                {kr && (
-                  editing === s.t ? (
-                    <span style={{ display: "flex", gap: 4, alignItems: "center" }}>
-                      <input autoFocus value={draft.price} onChange={(e) => setDraft({ ...draft, price: e.target.value })} placeholder="현재가"
-                        style={{ width: 70, background: "#0a0e14", border: "1px solid #2a3344", borderRadius: 4, color: "#e9edf4", fontSize: 11, padding: "3px 6px", fontFamily: "'IBM Plex Mono',monospace" }} />
-                      <input value={draft.prev} onChange={(e) => setDraft({ ...draft, prev: e.target.value })} placeholder="전일종가"
-                        style={{ width: 70, background: "#0a0e14", border: "1px solid #2a3344", borderRadius: 4, color: "#e9edf4", fontSize: 11, padding: "3px 6px", fontFamily: "'IBM Plex Mono',monospace" }} />
-                      <button onClick={() => saveManual(s.t)} style={{ background: "#2fd47a", border: "none", borderRadius: 4, color: "#06120a", fontSize: 11, padding: "3px 9px", cursor: "pointer", fontWeight: 600 }}>✓</button>
-                    </span>
-                  ) : (
-                    <button onClick={() => { setEditing(s.t); setDraft({ price: "", prev: "" }); }}
-                      style={{ background: "transparent", border: "1px solid #2a3344", borderRadius: 4, color: "#7c8aa0", fontSize: 10, padding: "3px 9px", cursor: "pointer", fontFamily: "'IBM Plex Sans KR',sans-serif" }}>
-                      mPOP 입력
-                    </button>
-                  )
-                )}
-              </div>
+  const StockCard = ({ s }) => {
+    const kr = s.kr;
+    const d = prices[s.t];
+    const price = d?.price ?? null;
+    const chg = d?.prevClose ? ((price - d.prevClose) / d.prevClose) * 100 : null;
+    const sig = signal(s, price);
+    const chgColor = chg == null ? FLAT : chg > 0 ? UP : chg < 0 ? DOWN : FLAT;
+    const mktFlag = kr ? "\u{1F1F0}\u{1F1F7}" : "\u{1F1FA}\u{1F1F8}";
+    return (
+      <div style={{ background: "#10151f", border: "1px solid #1a2130", borderLeft: `3px solid ${sig.color}`, borderRadius: 8, padding: "12px 14px" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 10 }}>
+          <div style={{ minWidth: 0 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: 6, flexWrap: "wrap" }}>
+              <span style={{ fontSize: 11 }}>{mktFlag}</span>
+              <span style={{ fontFamily: "'IBM Plex Sans KR',sans-serif", fontWeight: 600, fontSize: 15, color: "#e9edf4" }}>{s.n}</span>
+              <span style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 11, color: "#5b6677" }}>{s.t}</span>
+              <span style={{ fontSize: 10, fontFamily: "'IBM Plex Sans KR',sans-serif", color: "#7c8aa0", background: "#1a2130", padding: "1px 7px", borderRadius: 10 }}>{s.tag}</span>
+              {s.qty > 0 && <span style={{ fontSize: 10, fontFamily: "'IBM Plex Mono',monospace", color: "#8a93a6" }}>{s.qty}주</span>}
             </div>
-          );
-        })}
+            <div style={{ marginTop: 5, fontSize: 11, fontFamily: "'IBM Plex Sans KR',sans-serif", color: "#6b7689" }}>
+              {s.avg && <span>평단 {fmt(s.avg, kr)} · </span>}
+              {s.stop && <span style={{ color: "#b0556a" }}>손절 {fmt(s.stop, kr)} · </span>}
+              {s.entry && <span>타점 {s.entry.map((e) => `${fmt(e[0], kr)}~${fmt(e[1], kr)}`).join(" / ")} · </span>}
+              {s.chase && <span>추격✕ {fmt(s.chase, kr)} · </span>}
+              {s.note && <span style={{ color: "#8590a3" }}>{s.note}</span>}
+            </div>
+          </div>
+          <div style={{ textAlign: "right", flexShrink: 0 }}>
+            <div style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 17, fontWeight: 600, color: price == null ? "#3f4757" : "#e9edf4" }}>
+              {price == null ? "—" : fmt(price, kr)}
+            </div>
+            <div style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 12, color: chgColor }}>
+              {chg == null ? "" : `${chg > 0 ? "+" : ""}${chg.toFixed(2)}%`}
+            </div>
+            {s.qty > 0 && s.avg && price != null && (
+              <div style={{ fontSize: 10, fontFamily: "'IBM Plex Mono',monospace", color: price - s.avg >= 0 ? UP : DOWN, marginTop: 1 }}>
+                {(price - s.avg) / s.avg >= 0 ? "+" : ""}{(((price - s.avg) / s.avg) * 100).toFixed(1)}% · {kr ? `${Math.round(((price - s.avg) * s.qty) / 10000)}만` : `$${Math.round((price - s.avg) * s.qty)}`}
+              </div>
+            )}
+            {d?.manual && <div style={{ fontSize: 9, color: "#5b6677" }}>수동</div>}
+          </div>
+        </div>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 8 }}>
+          <span style={{ fontSize: 11, fontFamily: "'IBM Plex Sans KR',sans-serif", color: sig.color, fontWeight: 500 }}>
+            {sig.mark} {sig.label}
+          </span>
+          {kr && (
+            editing === s.t ? (
+              <span style={{ display: "flex", gap: 4, alignItems: "center" }}>
+                <input autoFocus value={draft.price} onChange={(e) => setDraft({ ...draft, price: e.target.value })} placeholder="현재가"
+                  style={{ width: 70, background: "#0a0e14", border: "1px solid #2a3344", borderRadius: 4, color: "#e9edf4", fontSize: 11, padding: "3px 6px", fontFamily: "'IBM Plex Mono',monospace" }} />
+                <input value={draft.prev} onChange={(e) => setDraft({ ...draft, prev: e.target.value })} placeholder="전일종가"
+                  style={{ width: 70, background: "#0a0e14", border: "1px solid #2a3344", borderRadius: 4, color: "#e9edf4", fontSize: 11, padding: "3px 6px", fontFamily: "'IBM Plex Mono',monospace" }} />
+                <button onClick={() => saveManual(s.t)} style={{ background: "#2fd47a", border: "none", borderRadius: 4, color: "#06120a", fontSize: 11, padding: "3px 9px", cursor: "pointer", fontWeight: 600 }}>✓</button>
+              </span>
+            ) : (
+              <button onClick={() => { setEditing(s.t); setDraft({ price: "", prev: "" }); }}
+                style={{ background: "transparent", border: "1px solid #2a3344", borderRadius: 4, color: "#7c8aa0", fontSize: 10, padding: "3px 9px", cursor: "pointer", fontFamily: "'IBM Plex Sans KR',sans-serif" }}>
+                mPOP 입력
+              </button>
+            )
+          )}
+        </div>
+      </div>
+    );
+  };
+
+  const SectionHeader = ({ icon, title, count, extra, collapsible, open, onToggle }) => (
+    <div onClick={collapsible ? onToggle : undefined}
+      style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8, marginBottom: 10, paddingBottom: 6, borderBottom: "1px solid #1d2433", cursor: collapsible ? "pointer" : "default", userSelect: "none" }}>
+      <div style={{ display: "flex", alignItems: "baseline", gap: 8 }}>
+        <span style={{ fontSize: 16 }}>{icon}</span>
+        <span style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 12, letterSpacing: 2, color: "#5b6677", textTransform: "uppercase" }}>{title}</span>
+        <span style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 11, color: "#3f4757" }}>{count}</span>
+      </div>
+      <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+        {extra && <span style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 10, color: "#5b6677" }}>{extra}</span>}
+        {collapsible && <span style={{ fontSize: 12, color: "#5b6677" }}>{open ? "▾" : "▸"}</span>}
       </div>
     </div>
   );
@@ -338,8 +379,61 @@ function CapTerminal() {
           ))}
         </div>
 
-        <Section title="US Watchlist" flag="\u{1F1FA}\u{1F1F8}" stocks={config.us} kr={false} />
-        <Section title="KR Watchlist" flag="\u{1F1F0}\u{1F1F7}" stocks={config.kr} kr={true} />
+        {/* 투자원금·평가 요약 */}
+        {(summary.krCost > 0 || summary.usCost > 0) && (
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6, marginBottom: 16 }}>
+            {summary.krCost > 0 && (
+              <div style={{ background: "#10151f", border: "1px solid #1a2130", borderRadius: 8, padding: "8px 10px" }}>
+                <div style={{ fontSize: 9, color: "#5b6677", fontFamily: "'IBM Plex Sans KR',sans-serif" }}>{"\u{1F1F0}\u{1F1F7}"} 투자원금</div>
+                <div style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 13, fontWeight: 600, color: "#8a93a6", marginTop: 2 }}>{Math.round(summary.krCost / 10000).toLocaleString("ko-KR")}만</div>
+                <div style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 11, color: summary.krPnL >= 0 ? UP : DOWN, marginTop: 1 }}>
+                  평가 {Math.round(summary.krVal / 10000).toLocaleString("ko-KR")}만
+                </div>
+              </div>
+            )}
+            {summary.usCost > 0 && (
+              <div style={{ background: "#10151f", border: "1px solid #1a2130", borderRadius: 8, padding: "8px 10px" }}>
+                <div style={{ fontSize: 9, color: "#5b6677", fontFamily: "'IBM Plex Sans KR',sans-serif" }}>{"\u{1F1FA}\u{1F1F8}"} 투자원금</div>
+                <div style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 13, fontWeight: 600, color: "#8a93a6", marginTop: 2 }}>${Math.round(summary.usCost).toLocaleString("en-US")}</div>
+                <div style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 11, color: summary.usPnL >= 0 ? UP : DOWN, marginTop: 1 }}>
+                  평가 ${Math.round(summary.usVal).toLocaleString("en-US")}
+                </div>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* 1. 진입 후보 */}
+        <div style={{ marginBottom: 26 }}>
+          <SectionHeader icon="\u{1F3AF}" title="진입 후보" count={grouped.entry.length} />
+          <div style={{ display: "grid", gap: 8 }}>
+            {grouped.entry.map((s) => <StockCard key={s.t} s={s} />)}
+          </div>
+        </div>
+
+        {/* 2. 보유 B등급 */}
+        {grouped.holdB.length > 0 && (
+          <div style={{ marginBottom: 26 }}>
+            <SectionHeader icon="\u{1F4CA}" title="보유 B등급" count={grouped.holdB.length} />
+            <div style={{ display: "grid", gap: 8 }}>
+              {grouped.holdB.map((s) => <StockCard key={s.t} s={s} />)}
+            </div>
+          </div>
+        )}
+
+        {/* 3. 코어 보유 (접기/펼치기) */}
+        {grouped.core.length > 0 && (
+          <div style={{ marginBottom: 26 }}>
+            <SectionHeader icon="\u{1F6E1}\u{FE0F}" title="코어 보유" count={grouped.core.length}
+              collapsible={true} open={coreOpen} onToggle={() => setCoreOpen(!coreOpen)}
+              extra={coreOpen ? "" : "탭하여 펼치기"} />
+            {coreOpen && (
+              <div style={{ display: "grid", gap: 8 }}>
+                {grouped.core.map((s) => <StockCard key={s.t} s={s} />)}
+              </div>
+            )}
+          </div>
+        )}
 
         <p style={{ fontSize: 10, color: "#3f4757", textAlign: "center", marginTop: 20, fontFamily: "'IBM Plex Sans KR',sans-serif", lineHeight: 1.6 }}>
           ↻ GitHub Actions 자동 수집 (평일 한·미 장마감 후) · 실패 시 📋 수동 입력<br />
