@@ -12,7 +12,7 @@
   "kr": [
     { "t": "010060", "n": "OCI홀딩스",          "tag": "B등급",   "entry": null, "chase": null, "avg": 327000, "stop": null, "qty": 7,   "note": "1Q26 실적 갈림길·홀드" },
     { "t": "000660", "n": "SK하이닉스",         "tag": "사실상A", "entry": null, "chase": null, "avg": null,   "stop": null, "qty": 12,  "note": "DCA 가격제한 185만" },
-    { "t": "005930", "n": "삼성전자",           "tag": "보유",    "entry": null, "chase": null, "avg": null,   "stop": null, "qty": 20,  "note": "" },
+    { "t": "005930", "n": "삼성전자",           "tag": "A등급",   "entry": null, "chase": null, "avg": null,   "stop": null, "qty": 20,  "note": "5/22 B→A 승격·DCA 주1(금)" },
     { "t": "017670", "n": "SKT",                "tag": "A등급",   "entry": null, "chase": null, "avg": 87532,  "stop": null, "qty": 92,  "note": "DCA 1주/일" },
     { "t": "487240", "n": "KODEX AI전력핵심설비","tag": "ETF",    "entry": null, "chase": null, "avg": 32676,  "stop": null, "qty": 331, "note": "DCA 1주/일(일시1주)" },
     { "t": "329180", "n": "HD현대중공업",       "tag": "워치·T1", "entry": [[640000,660000],[590000,610000]], "chase": 700000, "avg": null, "stop": null, "qty": 0, "note": "진입 보류" },
