@@ -8,7 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+KR:wght@400;500;600;700&display=swap" rel="stylesheet" />
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { background: #0f1319; color: #c8cdd8; }
+  body { background: #0f1319; transition: background .35s; }
   ::-webkit-scrollbar { width: 0; }
   @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
   @keyframes fadeIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
@@ -44,28 +44,52 @@ const DEFAULT_SEED = {
 };
 
 const PRICES_URL = "./prices.json";
-
 const UP = "#ef4444";
 const DOWN = "#60a5fa";
 const FLAT = "#8892a6";
 
-// 섹션 악센트
 const SEC = {
-  entry: { accent: "#3b82f6", bg: "rgba(59,130,246,0.04)", glow: "rgba(59,130,246,0.12)" },
-  holdB: { accent: "#f59e0b", bg: "rgba(245,158,11,0.04)", glow: "rgba(245,158,11,0.12)" },
-  core:  { accent: "#10b981", bg: "rgba(16,185,129,0.04)", glow: "rgba(16,185,129,0.12)" },
+  entry: { accent: "#3b82f6" },
+  holdB: { accent: "#f59e0b" },
+  core:  { accent: "#10b981" },
 };
 
-// 공통 글래스 스타일
-const GLASS = {
-  background: "rgba(255,255,255,0.025)",
-  backdropFilter: "blur(20px)",
-  WebkitBackdropFilter: "blur(20px)",
-  border: "1px solid rgba(255,255,255,0.06)",
-};
-const GLASS_INNER = {
-  background: "rgba(0,0,0,0.2)",
-  border: "1px solid rgba(255,255,255,0.03)",
+// 테마 정의
+const THEMES = {
+  dark: {
+    bg: "radial-gradient(ellipse at 20% -10%, #181f2e 0%, #0f1319 60%)",
+    bodyBg: "#0f1319",
+    glass: { background: "rgba(255,255,255,0.025)", backdropFilter: "blur(20px)", WebkitBackdropFilter: "blur(20px)", border: "1px solid rgba(255,255,255,0.06)" },
+    inner: { background: "rgba(0,0,0,0.2)", border: "1px solid rgba(255,255,255,0.03)" },
+    t1: "#edf0f7", t2: "#8892a6", t3: "#576175", t4: "#3f4757",
+    div: "rgba(255,255,255,0.04)", divStrong: "rgba(255,255,255,0.05)",
+    inputBg: "rgba(0,0,0,0.3)", inputBorder: "rgba(255,255,255,0.08)",
+    btnSecBg: "rgba(255,255,255,0.02)", btnSecBorder: "rgba(255,255,255,0.06)",
+    qtyBg: "rgba(255,255,255,0.04)",
+    tagAlpha: "15",
+    okBg: "rgba(52,211,153,.1)", okBorder: "rgba(52,211,153,.2)", okColor: "#34d399",
+    errBg: "rgba(248,113,113,.1)", errBorder: "rgba(248,113,113,.2)", errColor: "#f87171",
+    neutBg: "rgba(255,255,255,0.02)", neutBorder: "rgba(255,255,255,0.04)",
+    stopC: "#c06070", green: "#34d399", fxGreen: "#34d399", fxRed: "#f87171",
+    loadBg: "rgba(255,255,255,0.04)",
+  },
+  light: {
+    bg: "radial-gradient(ellipse at 20% -10%, #e4e9f1 0%, #f0f2f5 60%)",
+    bodyBg: "#f0f2f5",
+    glass: { background: "rgba(255,255,255,0.72)", backdropFilter: "blur(20px)", WebkitBackdropFilter: "blur(20px)", border: "1px solid rgba(0,0,0,0.07)", boxShadow: "0 1px 3px rgba(0,0,0,0.04)" },
+    inner: { background: "rgba(0,0,0,0.025)", border: "1px solid rgba(0,0,0,0.06)" },
+    t1: "#1a1d23", t2: "#4b5563", t3: "#9ca3af", t4: "#c0c7d2",
+    div: "rgba(0,0,0,0.06)", divStrong: "rgba(0,0,0,0.08)",
+    inputBg: "rgba(0,0,0,0.03)", inputBorder: "rgba(0,0,0,0.12)",
+    btnSecBg: "rgba(0,0,0,0.03)", btnSecBorder: "rgba(0,0,0,0.08)",
+    qtyBg: "rgba(0,0,0,0.05)",
+    tagAlpha: "18",
+    okBg: "rgba(22,163,74,.08)", okBorder: "rgba(22,163,74,.15)", okColor: "#16a34a",
+    errBg: "rgba(220,38,38,.06)", errBorder: "rgba(220,38,38,.12)", errColor: "#dc2626",
+    neutBg: "rgba(0,0,0,0.03)", neutBorder: "rgba(0,0,0,0.06)",
+    stopC: "#dc2626", green: "#16a34a", fxGreen: "#16a34a", fxRed: "#dc2626",
+    loadBg: "rgba(0,0,0,0.04)",
+  },
 };
 
 const fmt = (v, kr) =>
@@ -105,17 +129,24 @@ function CapTerminal() {
   const [config, setConfig] = useState(DEFAULT_SEED);
   const [fxRate, setFxRate] = useState(null);
   const [coreOpen, setCoreOpen] = useState(false);
+  const [mode, setMode] = useState(() => {
+    try { return localStorage.getItem("cap-theme") || "dark"; } catch(e) { return "dark"; }
+  });
+
+  const T = THEMES[mode] || THEMES.dark;
+
+  // 테마 변경 시 body 배경 + localStorage 저장
+  useEffect(() => {
+    document.body.style.background = T.bodyBg;
+    try { localStorage.setItem("cap-theme", mode); } catch(e) {}
+  }, [mode, T.bodyBg]);
 
   // localStorage 복원 + config.json fetch
   useEffect(() => {
     try {
       const saved = JSON.parse(localStorage.getItem("cap-prices"));
-      if (saved) {
-        setPrices(saved.prices || {});
-        setLastFetch(saved.lastFetch || null);
-      }
+      if (saved) { setPrices(saved.prices || {}); setLastFetch(saved.lastFetch || null); }
     } catch (e) {}
-    // config.json 로드 (종목 설정)
     fetch("./config.json?t=" + Date.now(), { cache: "no-store" })
       .then(r => { if (!r.ok) throw new Error("HTTP " + r.status); return r.json(); })
       .then(cfg => {
@@ -125,7 +156,6 @@ function CapTerminal() {
         }
       })
       .catch(() => {
-        // fetch 실패 시 localStorage 캐시 폴백
         try {
           const cached = JSON.parse(localStorage.getItem("cap-config"));
           if (cached?.us && cached?.kr) setConfig(cached);
@@ -138,7 +168,6 @@ function CapTerminal() {
     catch (e) { console.error(e); }
   }, [lastFetch]);
 
-  // GitHub Pages same-origin fetch
   async function autoRefresh() {
     setLoading(true);
     setStatus("GitHub에서 최신 종가 불러오는 중…");
@@ -150,7 +179,6 @@ function CapTerminal() {
       if (!res.ok) throw new Error("HTTP " + res.status);
       const json = await res.json();
       const arr = json.data || [];
-      // USD/KRW 환율 파싱
       if (json.fx && json.fx.USDKRW) setFxRate(json.fx.USDKRW);
       const next = { ...prices };
       let n = 0;
@@ -167,32 +195,22 @@ function CapTerminal() {
       setStatus("✓ GitHub 갱신 완료 · " + n + "종목 · 데이터 " + ts + " 기준");
     } catch (e) {
       setStatus("⚠ 자동 불러오기 실패 — 📋 수동 붙여넣기를 사용해줘 (" + (e.message || e) + ")");
-    } finally {
-      setLoading(false);
-    }
+    } finally { setLoading(false); }
   }
 
-  // 앱 열 때 1회 자동 갱신
   useEffect(() => { autoRefresh(); }, []);
 
-  // 전체 종목을 하나로 합치고 cat으로 분류
-  const allStocks = useMemo(() => {
-    const merged = [
-      ...config.us.map((s) => ({ ...s, kr: false })),
-      ...config.kr.map((s) => ({ ...s, kr: true })),
-    ];
-    return merged;
-  }, [config]);
+  const allStocks = useMemo(() => [
+    ...config.us.map((s) => ({ ...s, kr: false })),
+    ...config.kr.map((s) => ({ ...s, kr: true })),
+  ], [config]);
 
-  // cat별 종목 분류 + 진입후보 정렬(타점도달 우선)
   const grouped = useMemo(() => {
     const byCat = { entry: [], holdB: [], core: [] };
     allStocks.forEach((s) => {
       const cat = s.cat || "entry";
-      if (byCat[cat]) byCat[cat].push(s);
-      else byCat.entry.push(s);
+      if (byCat[cat]) byCat[cat].push(s); else byCat.entry.push(s);
     });
-    // 진입후보 정렬: ✅(타점도달) → 📋(대기) → 나머지
     const sigPriority = (s) => {
       const price = prices[s.t]?.price;
       const sig = signal(s, price);
@@ -214,9 +232,7 @@ function CapTerminal() {
       if (sig.mark === "✅") act++;
       if (sig.mark === "⛔") warn++;
       if (s.qty > 0 && s.avg) {
-        const cost = s.avg * s.qty;
-        const val = price * s.qty;
-        const pnl = val - cost;
+        const cost = s.avg * s.qty; const val = price * s.qty; const pnl = val - cost;
         if (s.kr) { krPnL += pnl; krCost += cost; krVal += val; }
         else { usPnL += pnl; usCost += cost; usVal += val; }
       }
@@ -241,8 +257,7 @@ function CapTerminal() {
         }
       });
     }
-    const next = { ...prices };
-    let n = 0;
+    const next = { ...prices }; let n = 0;
     parsed.forEach((r) => {
       const tk = String(r.ticker).replace(/[^0-9A-Za-z]/g, "");
       if (tk && r.price != null) {
@@ -252,8 +267,7 @@ function CapTerminal() {
     });
     const lf = new Date().toISOString();
     setPrices(next); setLastFetch(lf); persist(next, lf);
-    setBulk(""); setShowBulk(false);
-    setStatus(n + "개 종목 갱신됨");
+    setBulk(""); setShowBulk(false); setStatus(n + "개 종목 갱신됨");
   }
 
   function saveManual(tk) {
@@ -272,7 +286,6 @@ function CapTerminal() {
     const sig = signal(s, price);
     const chgColor = chg == null ? FLAT : chg > 0 ? UP : chg < 0 ? DOWN : FLAT;
     const mktFlag = kr ? "🇰🇷" : "🇺🇸";
-    // US 보유 종목 환율 환산
     const hasFx = !kr && s.avg && s.fx && fxRate && s.qty > 0 && price != null;
     const costKrw = hasFx ? s.avg * s.qty * s.fx : 0;
     const valKrw = hasFx ? price * s.qty * fxRate : 0;
@@ -280,26 +293,26 @@ function CapTerminal() {
     const fxPnl = hasFx ? s.avg * s.qty * (fxRate - s.fx) : 0;
     const ac = accent || "#8892a6";
     return (
-      <div style={{ ...GLASS, borderLeft: `3px solid ${sig.color}`, borderRadius: 12, padding: "14px 16px", animation: "fadeIn .3s ease" }}>
+      <div style={{ ...T.glass, borderLeft: `3px solid ${sig.color}`, borderRadius: 12, padding: "14px 16px", animation: "fadeIn .3s ease" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 12 }}>
           <div style={{ minWidth: 0 }}>
             <div style={{ display: "flex", alignItems: "center", gap: 7, flexWrap: "wrap" }}>
               <span style={{ fontSize: 12 }}>{mktFlag}</span>
-              <span style={{ fontFamily: "'IBM Plex Sans KR',sans-serif", fontWeight: 700, fontSize: 15, color: "#edf0f7", letterSpacing: -0.3 }}>{s.n}</span>
-              <span style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 10.5, color: "#576175", letterSpacing: 0.5 }}>{s.t}</span>
-              <span style={{ fontSize: 10, fontFamily: "'IBM Plex Sans KR',sans-serif", color: ac, background: `${ac}15`, padding: "2px 8px", borderRadius: 10, fontWeight: 500 }}>{s.tag}</span>
-              {s.qty > 0 && <span style={{ fontSize: 10, fontFamily: "'IBM Plex Mono',monospace", color: "#8892a6", background: "rgba(255,255,255,0.04)", padding: "1px 6px", borderRadius: 6 }}>{s.qty}주</span>}
+              <span style={{ fontFamily: "'IBM Plex Sans KR',sans-serif", fontWeight: 700, fontSize: 15, color: T.t1, letterSpacing: -0.3 }}>{s.n}</span>
+              <span style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 10.5, color: T.t3, letterSpacing: 0.5 }}>{s.t}</span>
+              <span style={{ fontSize: 10, fontFamily: "'IBM Plex Sans KR',sans-serif", color: ac, background: `${ac}${T.tagAlpha}`, padding: "2px 8px", borderRadius: 10, fontWeight: 500 }}>{s.tag}</span>
+              {s.qty > 0 && <span style={{ fontSize: 10, fontFamily: "'IBM Plex Mono',monospace", color: T.t2, background: T.qtyBg, padding: "1px 6px", borderRadius: 6 }}>{s.qty}주</span>}
             </div>
-            <div style={{ marginTop: 6, fontSize: 11, fontFamily: "'IBM Plex Sans KR',sans-serif", color: "#5f6b80", lineHeight: 1.5 }}>
+            <div style={{ marginTop: 6, fontSize: 11, fontFamily: "'IBM Plex Sans KR',sans-serif", color: T.t3, lineHeight: 1.5 }}>
               {s.avg && <span>평단 {fmt(s.avg, kr)} · </span>}
-              {s.stop && <span style={{ color: "#c06070" }}>손절 {fmt(s.stop, kr)} · </span>}
+              {s.stop && <span style={{ color: T.stopC }}>손절 {fmt(s.stop, kr)} · </span>}
               {s.entry && <span>타점 {s.entry.map((e) => `${fmt(e[0], kr)}~${fmt(e[1], kr)}`).join(" / ")} · </span>}
               {s.chase && <span>추격✕ {fmt(s.chase, kr)} · </span>}
-              {s.note && <span style={{ color: "#7a859a" }}>{s.note}</span>}
+              {s.note && <span style={{ color: T.t2 }}>{s.note}</span>}
             </div>
           </div>
           <div style={{ textAlign: "right", flexShrink: 0 }}>
-            <div style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 18, fontWeight: 600, color: price == null ? "#3a4050" : "#edf0f7", letterSpacing: -0.5 }}>
+            <div style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 18, fontWeight: 600, color: price == null ? T.t4 : T.t1, letterSpacing: -0.5 }}>
               {price == null ? "—" : fmt(price, kr)}
             </div>
             <div style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 12, color: chgColor, marginTop: 1 }}>
@@ -310,22 +323,22 @@ function CapTerminal() {
                 {(price - s.avg) / s.avg >= 0 ? "+" : ""}{(((price - s.avg) / s.avg) * 100).toFixed(1)}%
               </div>
             )}
-            {d?.manual && <div style={{ fontSize: 9, color: "#576175" }}>수동</div>}
+            {d?.manual && <div style={{ fontSize: 9, color: T.t3 }}>수동</div>}
           </div>
         </div>
         {/* 보유 종목: 투자원금 · 평가금액 표시 */}
         {s.qty > 0 && price != null && (
-          <div style={{ ...GLASS_INNER, marginTop: 10, padding: "8px 11px", borderRadius: 8, fontFamily: "'IBM Plex Mono',monospace", fontSize: 11 }}>
+          <div style={{ ...T.inner, marginTop: 10, padding: "8px 11px", borderRadius: 8, fontFamily: "'IBM Plex Mono',monospace", fontSize: 11 }}>
             {s.avg ? (
               <>
                 <div style={{ display: "flex", gap: 12 }}>
                   <div style={{ flex: 1 }}>
-                    <span style={{ color: "#576175", fontFamily: "'IBM Plex Sans KR',sans-serif", fontSize: 10 }}>투자원금 </span>
-                    <span style={{ color: "#8892a6", fontWeight: 500 }}>{kr ? `${Math.round(s.avg * s.qty / 10000).toLocaleString("ko-KR")}만` : `$${Math.round(s.avg * s.qty).toLocaleString("en-US")}`}</span>
+                    <span style={{ color: T.t3, fontFamily: "'IBM Plex Sans KR',sans-serif", fontSize: 10 }}>투자원금 </span>
+                    <span style={{ color: T.t2, fontWeight: 500 }}>{kr ? `${Math.round(s.avg * s.qty / 10000).toLocaleString("ko-KR")}만` : `$${Math.round(s.avg * s.qty).toLocaleString("en-US")}`}</span>
                   </div>
                   <div style={{ flex: 1 }}>
-                    <span style={{ color: "#576175", fontFamily: "'IBM Plex Sans KR',sans-serif", fontSize: 10 }}>평가금액 </span>
-                    <span style={{ color: "#edf0f7", fontWeight: 600 }}>{kr ? `${Math.round(price * s.qty / 10000).toLocaleString("ko-KR")}만` : `$${Math.round(price * s.qty).toLocaleString("en-US")}`}</span>
+                    <span style={{ color: T.t3, fontFamily: "'IBM Plex Sans KR',sans-serif", fontSize: 10 }}>평가금액 </span>
+                    <span style={{ color: T.t1, fontWeight: 600 }}>{kr ? `${Math.round(price * s.qty / 10000).toLocaleString("ko-KR")}만` : `$${Math.round(price * s.qty).toLocaleString("en-US")}`}</span>
                   </div>
                   <div>
                     <span style={{ color: (price - s.avg) >= 0 ? UP : DOWN, fontWeight: 600 }}>
@@ -334,14 +347,14 @@ function CapTerminal() {
                   </div>
                 </div>
                 {hasFx && (
-                  <div style={{ display: "flex", gap: 12, marginTop: 6, paddingTop: 6, borderTop: "1px solid rgba(255,255,255,0.04)" }}>
+                  <div style={{ display: "flex", gap: 12, marginTop: 6, paddingTop: 6, borderTop: `1px solid ${T.div}` }}>
                     <div style={{ flex: 1 }}>
-                      <span style={{ color: "#576175", fontFamily: "'IBM Plex Sans KR',sans-serif", fontSize: 10 }}>₩원금 </span>
-                      <span style={{ color: "#8892a6", fontWeight: 500 }}>{Math.round(costKrw / 10000).toLocaleString("ko-KR")}만</span>
+                      <span style={{ color: T.t3, fontFamily: "'IBM Plex Sans KR',sans-serif", fontSize: 10 }}>₩원금 </span>
+                      <span style={{ color: T.t2, fontWeight: 500 }}>{Math.round(costKrw / 10000).toLocaleString("ko-KR")}만</span>
                     </div>
                     <div style={{ flex: 1 }}>
-                      <span style={{ color: "#576175", fontFamily: "'IBM Plex Sans KR',sans-serif", fontSize: 10 }}>₩평가 </span>
-                      <span style={{ color: "#edf0f7", fontWeight: 600 }}>{Math.round(valKrw / 10000).toLocaleString("ko-KR")}만</span>
+                      <span style={{ color: T.t3, fontFamily: "'IBM Plex Sans KR',sans-serif", fontSize: 10 }}>₩평가 </span>
+                      <span style={{ color: T.t1, fontWeight: 600 }}>{Math.round(valKrw / 10000).toLocaleString("ko-KR")}만</span>
                     </div>
                     <div>
                       <span style={{ color: pnlKrw >= 0 ? UP : DOWN, fontWeight: 600 }}>
@@ -351,20 +364,20 @@ function CapTerminal() {
                   </div>
                 )}
                 {hasFx && (
-                  <div style={{ marginTop: 5, fontSize: 10, color: "#576175", fontFamily: "'IBM Plex Sans KR',sans-serif" }}>
-                    환차 <span style={{ color: fxPnl >= 0 ? "#34d399" : "#f87171", fontFamily: "'IBM Plex Mono',monospace" }}>
+                  <div style={{ marginTop: 5, fontSize: 10, color: T.t3, fontFamily: "'IBM Plex Sans KR',sans-serif" }}>
+                    환차 <span style={{ color: fxPnl >= 0 ? T.fxGreen : T.fxRed, fontFamily: "'IBM Plex Mono',monospace" }}>
                       {fxPnl >= 0 ? "+" : "-"}{Math.abs(Math.round(fxPnl / 10000)).toLocaleString("ko-KR")}만
                     </span>
-                    {" · "}환율 <span style={{ fontFamily: "'IBM Plex Mono',monospace", color: "#8892a6" }}>{fxRate.toLocaleString("ko-KR")}</span>
-                    <span style={{ color: "#3f4757" }}> (매수 {s.fx.toLocaleString("ko-KR")})</span>
+                    {" · "}환율 <span style={{ fontFamily: "'IBM Plex Mono',monospace", color: T.t2 }}>{fxRate.toLocaleString("ko-KR")}</span>
+                    <span style={{ color: T.t4 }}> (매수 {s.fx.toLocaleString("ko-KR")})</span>
                   </div>
                 )}
               </>
             ) : (
               <div>
-                <span style={{ color: "#576175", fontFamily: "'IBM Plex Sans KR',sans-serif", fontSize: 10 }}>평가금액 </span>
-                <span style={{ color: "#edf0f7", fontWeight: 600 }}>{kr ? `${Math.round(price * s.qty / 10000).toLocaleString("ko-KR")}만` : `$${Math.round(price * s.qty).toLocaleString("en-US")}`}</span>
-                <span style={{ color: "#576175", fontFamily: "'IBM Plex Sans KR',sans-serif", fontSize: 10 }}> ({s.qty}주)</span>
+                <span style={{ color: T.t3, fontFamily: "'IBM Plex Sans KR',sans-serif", fontSize: 10 }}>평가금액 </span>
+                <span style={{ color: T.t1, fontWeight: 600 }}>{kr ? `${Math.round(price * s.qty / 10000).toLocaleString("ko-KR")}만` : `$${Math.round(price * s.qty).toLocaleString("en-US")}`}</span>
+                <span style={{ color: T.t3, fontFamily: "'IBM Plex Sans KR',sans-serif", fontSize: 10 }}> ({s.qty}주)</span>
               </div>
             )}
           </div>
@@ -377,14 +390,14 @@ function CapTerminal() {
             editing === s.t ? (
               <span style={{ display: "flex", gap: 4, alignItems: "center" }}>
                 <input autoFocus value={draft.price} onChange={(e) => setDraft({ ...draft, price: e.target.value })} placeholder="현재가"
-                  style={{ width: 70, background: "rgba(0,0,0,0.3)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 6, color: "#edf0f7", fontSize: 11, padding: "4px 7px", fontFamily: "'IBM Plex Mono',monospace" }} />
+                  style={{ width: 70, background: T.inputBg, border: `1px solid ${T.inputBorder}`, borderRadius: 6, color: T.t1, fontSize: 11, padding: "4px 7px", fontFamily: "'IBM Plex Mono',monospace" }} />
                 <input value={draft.prev} onChange={(e) => setDraft({ ...draft, prev: e.target.value })} placeholder="전일종가"
-                  style={{ width: 70, background: "rgba(0,0,0,0.3)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 6, color: "#edf0f7", fontSize: 11, padding: "4px 7px", fontFamily: "'IBM Plex Mono',monospace" }} />
-                <button onClick={() => saveManual(s.t)} style={{ background: "#34d399", border: "none", borderRadius: 6, color: "#06120a", fontSize: 11, padding: "4px 10px", cursor: "pointer", fontWeight: 600 }}>✓</button>
+                  style={{ width: 70, background: T.inputBg, border: `1px solid ${T.inputBorder}`, borderRadius: 6, color: T.t1, fontSize: 11, padding: "4px 7px", fontFamily: "'IBM Plex Mono',monospace" }} />
+                <button onClick={() => saveManual(s.t)} style={{ background: T.green, border: "none", borderRadius: 6, color: mode === "dark" ? "#06120a" : "#fff", fontSize: 11, padding: "4px 10px", cursor: "pointer", fontWeight: 600 }}>✓</button>
               </span>
             ) : (
               <button onClick={() => { setEditing(s.t); setDraft({ price: "", prev: "" }); }}
-                style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 6, color: "#7a859a", fontSize: 10, padding: "4px 10px", cursor: "pointer", fontFamily: "'IBM Plex Sans KR',sans-serif" }}>
+                style={{ background: T.btnSecBg, border: `1px solid ${T.btnSecBorder}`, borderRadius: 6, color: T.t2, fontSize: 10, padding: "4px 10px", cursor: "pointer", fontFamily: "'IBM Plex Sans KR',sans-serif" }}>
                 mPOP 입력
               </button>
             )
@@ -396,47 +409,56 @@ function CapTerminal() {
 
   const SectionHeader = ({ icon, title, count, accent, extra, collapsible, open, onToggle }) => (
     <div onClick={collapsible ? onToggle : undefined}
-      style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8, marginBottom: 12, padding: "8px 12px", borderRadius: 10, background: `linear-gradient(90deg, ${accent}10, transparent 70%)`, borderLeft: `3px solid ${accent}`, cursor: collapsible ? "pointer" : "default", userSelect: "none" }}>
+      style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 8, marginBottom: 12, padding: "8px 12px", borderRadius: 10, background: `linear-gradient(90deg, ${accent}${mode === "dark" ? "10" : "14"}, transparent 70%)`, borderLeft: `3px solid ${accent}`, cursor: collapsible ? "pointer" : "default", userSelect: "none" }}>
       <div style={{ display: "flex", alignItems: "baseline", gap: 8 }}>
         <span style={{ fontSize: 15 }}>{icon}</span>
         <span style={{ fontFamily: "'IBM Plex Sans KR',sans-serif", fontSize: 13, letterSpacing: 0.5, color: accent, fontWeight: 600 }}>{title}</span>
-        <span style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 11, color: "#4a5568", fontWeight: 500 }}>{count}</span>
+        <span style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 11, color: T.t3, fontWeight: 500 }}>{count}</span>
       </div>
       <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-        {extra && <span style={{ fontFamily: "'IBM Plex Sans KR',sans-serif", fontSize: 10, color: "#576175" }}>{extra}</span>}
+        {extra && <span style={{ fontFamily: "'IBM Plex Sans KR',sans-serif", fontSize: 10, color: T.t3 }}>{extra}</span>}
         {collapsible && <span style={{ fontSize: 12, color: accent, opacity: 0.6 }}>{open ? "▾" : "▸"}</span>}
       </div>
     </div>
   );
 
+  const toggleIcon = mode === "dark" ? "☀️" : "🌙";
+
   return (
-    <div style={{ minHeight: "100vh", background: "radial-gradient(ellipse at 20% -10%, #181f2e 0%, #0f1319 60%)", padding: "24px 16px 60px", fontFamily: "'IBM Plex Sans KR',sans-serif" }}>
+    <div style={{ minHeight: "100vh", background: T.bg, padding: "24px 16px 60px", fontFamily: "'IBM Plex Sans KR',sans-serif", transition: "background .35s" }}>
       <div style={{ maxWidth: 560, margin: "0 auto" }}>
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-end", marginBottom: 6 }}>
-          <h1 style={{ margin: 0, fontFamily: "'IBM Plex Mono',monospace", fontSize: 21, fontWeight: 700, letterSpacing: 1.5, color: "#edf0f7" }}>
-            CAP<span style={{ color: "#34d399" }}>·</span>TERMINAL
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 6 }}>
+          <h1 style={{ margin: 0, fontFamily: "'IBM Plex Mono',monospace", fontSize: 21, fontWeight: 700, letterSpacing: 1.5, color: T.t1 }}>
+            CAP<span style={{ color: T.green }}>·</span>TERMINAL
           </h1>
-          <span style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 10, color: "#576175" }}>
-            {lastFetch ? `갱신 ${new Date(lastFetch).toLocaleString("ko-KR", { month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" })}` : "미갱신"}
-          </span>
+          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+            <span style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 10, color: T.t3 }}>
+              {lastFetch ? `갱신 ${new Date(lastFetch).toLocaleString("ko-KR", { month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" })}` : "미갱신"}
+            </span>
+            <button onClick={() => setMode(mode === "dark" ? "light" : "dark")}
+              style={{ background: T.btnSecBg, border: `1px solid ${T.btnSecBorder}`, borderRadius: 8, padding: "4px 8px", cursor: "pointer", fontSize: 14, lineHeight: 1 }}
+              title={mode === "dark" ? "라이트 모드" : "다크 모드"}>
+              {toggleIcon}
+            </button>
+          </div>
         </div>
-        <p style={{ margin: "0 0 18px", fontSize: 11, color: "#576175", fontFamily: "'IBM Plex Sans KR',sans-serif", lineHeight: 1.4 }}>
+        <p style={{ margin: "0 0 18px", fontSize: 11, color: T.t3, fontFamily: "'IBM Plex Sans KR',sans-serif", lineHeight: 1.4 }}>
           워치리스트 실시간 타점 괴리 · 상승 <span style={{ color: UP }}>빨강</span> / 하락 <span style={{ color: DOWN }}>파랑</span>
         </p>
 
         <button onClick={autoRefresh} disabled={loading}
-          style={{ width: "100%", padding: "14px", marginBottom: 8, background: loading ? "rgba(255,255,255,0.04)" : "linear-gradient(135deg, #2563eb, #3b82f6)", border: "none", borderRadius: 10, color: loading ? "#7a859a" : "#fff", fontSize: 14, fontWeight: 600, cursor: loading ? "wait" : "pointer", fontFamily: "'IBM Plex Sans KR',sans-serif", letterSpacing: 0.3 }}>
+          style={{ width: "100%", padding: "14px", marginBottom: 8, background: loading ? T.loadBg : "linear-gradient(135deg, #2563eb, #3b82f6)", border: "none", borderRadius: 10, color: loading ? T.t2 : "#fff", fontSize: 14, fontWeight: 600, cursor: loading ? "wait" : "pointer", fontFamily: "'IBM Plex Sans KR',sans-serif", letterSpacing: 0.3 }}>
           {loading ? "⟳ 불러오는 중…" : "↻ 자동 새로고침 · GitHub"}
         </button>
         <button onClick={() => setShowBulk(!showBulk)}
-          style={{ width: "100%", padding: "10px", marginBottom: 10, background: "rgba(255,255,255,0.02)", border: "1px solid rgba(255,255,255,0.06)", borderRadius: 10, color: "#7a859a", fontSize: 12, fontWeight: 500, cursor: "pointer", fontFamily: "'IBM Plex Sans KR',sans-serif" }}>
+          style={{ width: "100%", padding: "10px", marginBottom: 10, background: T.btnSecBg, border: `1px solid ${T.btnSecBorder}`, borderRadius: 10, color: T.t2, fontSize: 12, fontWeight: 500, cursor: "pointer", fontFamily: "'IBM Plex Sans KR',sans-serif" }}>
           📋 수동 붙여넣기 (폴백)
         </button>
         {showBulk && (
           <div style={{ marginBottom: 12 }}>
             <textarea value={bulk} onChange={(e) => setBulk(e.target.value)} rows={5}
               placeholder={'캡이 준 JSON을 붙여넣거나,\n한 줄에 "티커 현재가 전일종가" 형식으로:\nGEV 1007 1012\n347700 39500 42000'}
-              style={{ width: "100%", boxSizing: "border-box", background: "rgba(0,0,0,0.3)", border: "1px solid rgba(255,255,255,0.06)", borderRadius: 10, color: "#edf0f7", fontSize: 12, padding: "12px", fontFamily: "'IBM Plex Mono',monospace", resize: "vertical", lineHeight: 1.6 }} />
+              style={{ width: "100%", boxSizing: "border-box", background: T.inputBg, border: `1px solid ${T.inputBorder}`, borderRadius: 10, color: T.t1, fontSize: 12, padding: "12px", fontFamily: "'IBM Plex Mono',monospace", resize: "vertical", lineHeight: 1.6 }} />
             <button onClick={applyBulk}
               style={{ width: "100%", padding: "11px", marginTop: 6, background: "linear-gradient(135deg, #2563eb, #3b82f6)", border: "none", borderRadius: 10, color: "#fff", fontSize: 13, fontWeight: 600, cursor: "pointer", fontFamily: "'IBM Plex Sans KR',sans-serif" }}>
               적용 →
@@ -445,45 +467,45 @@ function CapTerminal() {
         )}
         {status && (
           <div style={{ margin: "0 0 14px", padding: "10px 14px", borderRadius: 10, fontSize: 12, textAlign: "center", fontFamily: "'IBM Plex Mono',monospace",
-            background: status.startsWith("✓") ? "rgba(52,211,153,.1)" : status.startsWith("⚠") ? "rgba(248,113,113,.1)" : "rgba(255,255,255,0.02)",
-            color: status.startsWith("✓") ? "#34d399" : status.startsWith("⚠") ? "#f87171" : "#7a859a",
-            border: `1px solid ${status.startsWith("✓") ? "rgba(52,211,153,.2)" : status.startsWith("⚠") ? "rgba(248,113,113,.2)" : "rgba(255,255,255,0.04)"}` }}>
+            background: status.startsWith("✓") ? T.okBg : status.startsWith("⚠") ? T.errBg : T.neutBg,
+            color: status.startsWith("✓") ? T.okColor : status.startsWith("⚠") ? T.errColor : T.t2,
+            border: `1px solid ${status.startsWith("✓") ? T.okBorder : status.startsWith("⚠") ? T.errBorder : T.neutBorder}` }}>
             {status}
           </div>
         )}
         {/* 신호 요약 */}
         <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginBottom: 10 }}>
           {[
-            { l: "타점도달", v: summary.act, c: "#34d399" },
+            { l: "타점도달", v: summary.act, c: T.green },
             { l: "손절위험", v: summary.warn, c: UP },
           ].map((b, i) => (
-            <div key={i} style={{ ...GLASS, borderRadius: 10, padding: "10px 4px", textAlign: "center" }}>
+            <div key={i} style={{ ...T.glass, borderRadius: 10, padding: "10px 4px", textAlign: "center" }}>
               <div style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 18, fontWeight: 700, color: b.c }}>{b.v}</div>
-              <div style={{ fontSize: 9, color: "#576175", fontFamily: "'IBM Plex Sans KR',sans-serif", marginTop: 3 }}>{b.l}</div>
+              <div style={{ fontSize: 9, color: T.t3, fontFamily: "'IBM Plex Sans KR',sans-serif", marginTop: 3 }}>{b.l}</div>
             </div>
           ))}
         </div>
 
         {/* 투자원금 · 평가금액 · 손익 요약 */}
         {(summary.krCost > 0 || summary.usCost > 0) && (
-          <div style={{ ...GLASS, borderRadius: 12, padding: "14px 16px", marginBottom: 20 }}>
-            <div style={{ fontSize: 11, color: "#576175", fontFamily: "'IBM Plex Sans KR',sans-serif", marginBottom: 12, fontWeight: 600 }}>
+          <div style={{ ...T.glass, borderRadius: 12, padding: "14px 16px", marginBottom: 20 }}>
+            <div style={{ fontSize: 11, color: T.t3, fontFamily: "'IBM Plex Sans KR',sans-serif", marginBottom: 12, fontWeight: 600 }}>
               💰 보유 포트폴리오
             </div>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12 }}>
               {summary.krCost > 0 && (
                 <div>
-                  <div style={{ fontSize: 10, color: "#576175", fontFamily: "'IBM Plex Sans KR',sans-serif", marginBottom: 5 }}>{"🇰🇷"} 한국</div>
+                  <div style={{ fontSize: 10, color: T.t3, fontFamily: "'IBM Plex Sans KR',sans-serif", marginBottom: 5 }}>{"🇰🇷"} 한국</div>
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
-                    <span style={{ fontSize: 10, color: "#5f6b80", fontFamily: "'IBM Plex Sans KR',sans-serif" }}>원금</span>
-                    <span style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 13, fontWeight: 600, color: "#8892a6" }}>{Math.round(summary.krCost / 10000).toLocaleString("ko-KR")}만</span>
+                    <span style={{ fontSize: 10, color: T.t3, fontFamily: "'IBM Plex Sans KR',sans-serif" }}>원금</span>
+                    <span style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 13, fontWeight: 600, color: T.t2 }}>{Math.round(summary.krCost / 10000).toLocaleString("ko-KR")}만</span>
                   </div>
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginTop: 4 }}>
-                    <span style={{ fontSize: 10, color: "#5f6b80", fontFamily: "'IBM Plex Sans KR',sans-serif" }}>평가</span>
-                    <span style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 13, fontWeight: 600, color: "#edf0f7" }}>{Math.round(summary.krVal / 10000).toLocaleString("ko-KR")}만</span>
+                    <span style={{ fontSize: 10, color: T.t3, fontFamily: "'IBM Plex Sans KR',sans-serif" }}>평가</span>
+                    <span style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 13, fontWeight: 600, color: T.t1 }}>{Math.round(summary.krVal / 10000).toLocaleString("ko-KR")}만</span>
                   </div>
-                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginTop: 4, paddingTop: 5, borderTop: "1px solid rgba(255,255,255,0.05)" }}>
-                    <span style={{ fontSize: 10, color: "#5f6b80", fontFamily: "'IBM Plex Sans KR',sans-serif" }}>손익</span>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginTop: 4, paddingTop: 5, borderTop: `1px solid ${T.divStrong}` }}>
+                    <span style={{ fontSize: 10, color: T.t3, fontFamily: "'IBM Plex Sans KR',sans-serif" }}>손익</span>
                     <span style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 14, fontWeight: 700, color: summary.krPnL >= 0 ? UP : DOWN }}>
                       {summary.krPnL >= 0 ? "+" : "-"}{Math.abs(Math.round(summary.krPnL / 10000)).toLocaleString("ko-KR")}만
                     </span>
@@ -491,18 +513,18 @@ function CapTerminal() {
                 </div>
               )}
               {summary.usCost > 0 && (
-                <div style={summary.krCost > 0 ? { borderLeft: "1px solid rgba(255,255,255,0.05)", paddingLeft: 12 } : {}}>
-                  <div style={{ fontSize: 10, color: "#576175", fontFamily: "'IBM Plex Sans KR',sans-serif", marginBottom: 5 }}>{"🇺🇸"} 미국</div>
+                <div style={summary.krCost > 0 ? { borderLeft: `1px solid ${T.divStrong}`, paddingLeft: 12 } : {}}>
+                  <div style={{ fontSize: 10, color: T.t3, fontFamily: "'IBM Plex Sans KR',sans-serif", marginBottom: 5 }}>{"🇺🇸"} 미국</div>
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
-                    <span style={{ fontSize: 10, color: "#5f6b80", fontFamily: "'IBM Plex Sans KR',sans-serif" }}>원금</span>
-                    <span style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 13, fontWeight: 600, color: "#8892a6" }}>${Math.round(summary.usCost).toLocaleString("en-US")}</span>
+                    <span style={{ fontSize: 10, color: T.t3, fontFamily: "'IBM Plex Sans KR',sans-serif" }}>원금</span>
+                    <span style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 13, fontWeight: 600, color: T.t2 }}>${Math.round(summary.usCost).toLocaleString("en-US")}</span>
                   </div>
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginTop: 4 }}>
-                    <span style={{ fontSize: 10, color: "#5f6b80", fontFamily: "'IBM Plex Sans KR',sans-serif" }}>평가</span>
-                    <span style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 13, fontWeight: 600, color: "#edf0f7" }}>${Math.round(summary.usVal).toLocaleString("en-US")}</span>
+                    <span style={{ fontSize: 10, color: T.t3, fontFamily: "'IBM Plex Sans KR',sans-serif" }}>평가</span>
+                    <span style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 13, fontWeight: 600, color: T.t1 }}>${Math.round(summary.usVal).toLocaleString("en-US")}</span>
                   </div>
-                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginTop: 4, paddingTop: 5, borderTop: "1px solid rgba(255,255,255,0.05)" }}>
-                    <span style={{ fontSize: 10, color: "#5f6b80", fontFamily: "'IBM Plex Sans KR',sans-serif" }}>손익</span>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginTop: 4, paddingTop: 5, borderTop: `1px solid ${T.divStrong}` }}>
+                    <span style={{ fontSize: 10, color: T.t3, fontFamily: "'IBM Plex Sans KR',sans-serif" }}>손익</span>
                     <span style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 14, fontWeight: 700, color: summary.usPnL >= 0 ? UP : DOWN }}>
                       {summary.usPnL >= 0 ? "+" : "-"}${Math.abs(Math.round(summary.usPnL)).toLocaleString("en-US")}
                     </span>
@@ -545,7 +567,7 @@ function CapTerminal() {
           </div>
         )}
 
-        <p style={{ fontSize: 10, color: "#3f4757", textAlign: "center", marginTop: 24, fontFamily: "'IBM Plex Sans KR',sans-serif", lineHeight: 1.7 }}>
+        <p style={{ fontSize: 10, color: T.t4, textAlign: "center", marginTop: 24, fontFamily: "'IBM Plex Sans KR',sans-serif", lineHeight: 1.7 }}>
           ↻ GitHub Actions 자동 수집 (평일 한·미 장마감 후) · 실패 시 📋 수동 입력<br />
           데이터 권위 = mPOP · 신호는 보조지표일 뿐 매매 트리거 아님
         </p>
