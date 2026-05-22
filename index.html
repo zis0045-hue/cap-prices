@@ -277,12 +277,40 @@ function CapTerminal() {
             </div>
             {s.qty > 0 && s.avg && price != null && (
               <div style={{ fontSize: 10, fontFamily: "'IBM Plex Mono',monospace", color: price - s.avg >= 0 ? UP : DOWN, marginTop: 1 }}>
-                {(price - s.avg) / s.avg >= 0 ? "+" : ""}{(((price - s.avg) / s.avg) * 100).toFixed(1)}% · {kr ? `${Math.round(((price - s.avg) * s.qty) / 10000)}만` : `$${Math.round((price - s.avg) * s.qty)}`}
+                {(price - s.avg) / s.avg >= 0 ? "+" : ""}{(((price - s.avg) / s.avg) * 100).toFixed(1)}%
               </div>
             )}
             {d?.manual && <div style={{ fontSize: 9, color: "#5b6677" }}>수동</div>}
           </div>
         </div>
+        {/* 보유 종목: 투자원금 · 평가금액 표시 */}
+        {s.qty > 0 && price != null && (
+          <div style={{ display: "flex", gap: 12, marginTop: 8, padding: "7px 10px", background: "#0c1018", borderRadius: 6, fontFamily: "'IBM Plex Mono',monospace", fontSize: 11 }}>
+            {s.avg ? (
+              <>
+                <div style={{ flex: 1 }}>
+                  <span style={{ color: "#5b6677", fontFamily: "'IBM Plex Sans KR',sans-serif", fontSize: 10 }}>투자원금 </span>
+                  <span style={{ color: "#8a93a6", fontWeight: 500 }}>{kr ? `${Math.round(s.avg * s.qty / 10000).toLocaleString("ko-KR")}만` : `$${Math.round(s.avg * s.qty).toLocaleString("en-US")}`}</span>
+                </div>
+                <div style={{ flex: 1 }}>
+                  <span style={{ color: "#5b6677", fontFamily: "'IBM Plex Sans KR',sans-serif", fontSize: 10 }}>평가금액 </span>
+                  <span style={{ color: "#e9edf4", fontWeight: 600 }}>{kr ? `${Math.round(price * s.qty / 10000).toLocaleString("ko-KR")}만` : `$${Math.round(price * s.qty).toLocaleString("en-US")}`}</span>
+                </div>
+                <div>
+                  <span style={{ color: (price - s.avg) >= 0 ? UP : DOWN, fontWeight: 600 }}>
+                    {(price - s.avg) >= 0 ? "+" : "-"}{kr ? `${Math.abs(Math.round((price - s.avg) * s.qty / 10000)).toLocaleString("ko-KR")}만` : `$${Math.abs(Math.round((price - s.avg) * s.qty)).toLocaleString("en-US")}`}
+                  </span>
+                </div>
+              </>
+            ) : (
+              <div>
+                <span style={{ color: "#5b6677", fontFamily: "'IBM Plex Sans KR',sans-serif", fontSize: 10 }}>평가금액 </span>
+                <span style={{ color: "#e9edf4", fontWeight: 600 }}>{kr ? `${Math.round(price * s.qty / 10000).toLocaleString("ko-KR")}만` : `$${Math.round(price * s.qty).toLocaleString("en-US")}`}</span>
+                <span style={{ color: "#5b6677", fontFamily: "'IBM Plex Sans KR',sans-serif", fontSize: 10 }}> ({s.qty}주)</span>
+              </div>
+            )}
+          </div>
+        )}
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginTop: 8 }}>
           <span style={{ fontSize: 11, fontFamily: "'IBM Plex Sans KR',sans-serif", color: sig.color, fontWeight: 500 }}>
             {sig.mark} {sig.label}
