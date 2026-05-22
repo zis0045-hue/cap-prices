@@ -59,9 +59,9 @@ function signal(s, price) {
       const [lo, hi] = s.entry[i];
       if (price >= lo && price <= hi) return { mark: "✅", label: `${i + 1}차 타점 도달`, color: "#2fd47a" };
     }
-    if (s.chase && price > s.chase) return { mark: "\u{1F6AB}", label: "추격금지 초과", color: FLAT };
+    if (s.chase && price > s.chase) return { mark: "🚫", label: "추격금지 초과", color: FLAT };
     if (price > s.entry[0][1] && (!s.chase || price <= s.chase))
-      return { mark: "\u{1F4CB}", label: "타점 상단 대기", color: "#e8b339" };
+      return { mark: "📋", label: "타점 상단 대기", color: "#e8b339" };
     if (price < s.entry[s.entry.length - 1][0])
       return { mark: "✅", label: "최저 타점 하회", color: "#2fd47a" };
   }
@@ -143,7 +143,7 @@ function CapTerminal() {
       const ts = json.updated ? new Date(json.updated).toLocaleString("ko-KR", { month: "2-digit", day: "2-digit", hour: "2-digit", minute: "2-digit" }) : "방금";
       setStatus("✓ GitHub 갱신 완료 · " + n + "종목 · 데이터 " + ts + " 기준");
     } catch (e) {
-      setStatus("⚠ 자동 불러오기 실패 — \u{1F4CB} 수동 붙여넣기를 사용해줘 (" + (e.message || e) + ")");
+      setStatus("⚠ 자동 불러오기 실패 — 📋 수동 붙여넣기를 사용해줘 (" + (e.message || e) + ")");
     } finally {
       setLoading(false);
     }
@@ -175,7 +175,7 @@ function CapTerminal() {
       const sig = signal(s, price);
       if (sig.mark === "✅") return 0;
       if (sig.mark === "⛔") return 1;
-      if (sig.mark === "\u{1F4CB}") return 2;
+      if (sig.mark === "📋") return 2;
       return 3;
     };
     byCat.entry.sort((a, b) => sigPriority(a) - sigPriority(b));
@@ -248,7 +248,7 @@ function CapTerminal() {
     const chg = d?.prevClose ? ((price - d.prevClose) / d.prevClose) * 100 : null;
     const sig = signal(s, price);
     const chgColor = chg == null ? FLAT : chg > 0 ? UP : chg < 0 ? DOWN : FLAT;
-    const mktFlag = kr ? "\u{1F1F0}\u{1F1F7}" : "\u{1F1FA}\u{1F1F8}";
+    const mktFlag = kr ? "🇰🇷" : "🇺🇸";
     return (
       <div style={{ background: "#10151f", border: "1px solid #1a2130", borderLeft: `3px solid ${sig.color}`, borderRadius: 8, padding: "12px 14px" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start", gap: 10 }}>
@@ -410,12 +410,12 @@ function CapTerminal() {
         {(summary.krCost > 0 || summary.usCost > 0) && (
           <div style={{ background: "#10151f", border: "1px solid #1a2130", borderRadius: 10, padding: "12px 14px", marginBottom: 16 }}>
             <div style={{ fontSize: 11, color: "#5b6677", fontFamily: "'IBM Plex Sans KR',sans-serif", marginBottom: 10, fontWeight: 500 }}>
-              \u{1F4B0} 보유 포트폴리오
+              💰 보유 포트폴리오
             </div>
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
               {summary.krCost > 0 && (
                 <div>
-                  <div style={{ fontSize: 10, color: "#5b6677", fontFamily: "'IBM Plex Sans KR',sans-serif", marginBottom: 4 }}>{"\u{1F1F0}\u{1F1F7}"} 한국</div>
+                  <div style={{ fontSize: 10, color: "#5b6677", fontFamily: "'IBM Plex Sans KR',sans-serif", marginBottom: 4 }}>{"🇰🇷"} 한국</div>
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
                     <span style={{ fontSize: 10, color: "#6b7689", fontFamily: "'IBM Plex Sans KR',sans-serif" }}>원금</span>
                     <span style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 13, fontWeight: 600, color: "#8a93a6" }}>{Math.round(summary.krCost / 10000).toLocaleString("ko-KR")}만</span>
@@ -434,7 +434,7 @@ function CapTerminal() {
               )}
               {summary.usCost > 0 && (
                 <div style={summary.krCost > 0 ? { borderLeft: "1px solid #1a2130", paddingLeft: 10 } : {}}>
-                  <div style={{ fontSize: 10, color: "#5b6677", fontFamily: "'IBM Plex Sans KR',sans-serif", marginBottom: 4 }}>{"\u{1F1FA}\u{1F1F8}"} 미국</div>
+                  <div style={{ fontSize: 10, color: "#5b6677", fontFamily: "'IBM Plex Sans KR',sans-serif", marginBottom: 4 }}>{"🇺🇸"} 미국</div>
                   <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
                     <span style={{ fontSize: 10, color: "#6b7689", fontFamily: "'IBM Plex Sans KR',sans-serif" }}>원금</span>
                     <span style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 13, fontWeight: 600, color: "#8a93a6" }}>${Math.round(summary.usCost).toLocaleString("en-US")}</span>
@@ -457,7 +457,7 @@ function CapTerminal() {
 
         {/* 1. 진입 후보 */}
         <div style={{ marginBottom: 26 }}>
-          <SectionHeader icon="\u{1F3AF}" title="진입 후보" count={grouped.entry.length} />
+          <SectionHeader icon="🎯" title="진입 후보" count={grouped.entry.length} />
           <div style={{ display: "grid", gap: 8 }}>
             {grouped.entry.map((s) => <StockCard key={s.t} s={s} />)}
           </div>
@@ -466,7 +466,7 @@ function CapTerminal() {
         {/* 2. 보유 B등급 */}
         {grouped.holdB.length > 0 && (
           <div style={{ marginBottom: 26 }}>
-            <SectionHeader icon="\u{1F4CA}" title="보유 B등급" count={grouped.holdB.length} />
+            <SectionHeader icon="📊" title="보유 B등급" count={grouped.holdB.length} />
             <div style={{ display: "grid", gap: 8 }}>
               {grouped.holdB.map((s) => <StockCard key={s.t} s={s} />)}
             </div>
@@ -476,7 +476,7 @@ function CapTerminal() {
         {/* 3. 코어 보유 (접기/펼치기) */}
         {grouped.core.length > 0 && (
           <div style={{ marginBottom: 26 }}>
-            <SectionHeader icon="\u{1F6E1}\u{FE0F}" title="코어 보유" count={grouped.core.length}
+            <SectionHeader icon="🛡️" title="코어 보유" count={grouped.core.length}
               collapsible={true} open={coreOpen} onToggle={() => setCoreOpen(!coreOpen)}
               extra={coreOpen ? "" : "탭하여 펼치기"} />
             {coreOpen && (
