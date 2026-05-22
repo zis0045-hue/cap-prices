@@ -365,12 +365,11 @@ function CapTerminal() {
             {status}
           </div>
         )}
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 6, marginBottom: 16 }}>
+        {/* 신호 요약 */}
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6, marginBottom: 8 }}>
           {[
             { l: "타점도달", v: summary.act, c: "#2fd47a" },
             { l: "손절위험", v: summary.warn, c: UP },
-            { l: "\u{1F1F0}\u{1F1F7} 손익", v: summary.krPnL ? `${summary.krPnL > 0 ? "+" : "-"}${Math.abs(Math.round(summary.krPnL / 10000))}만` : "—", c: summary.krPnL >= 0 ? UP : DOWN },
-            { l: "\u{1F1FA}\u{1F1F8} 손익", v: summary.usPnL ? `${summary.usPnL > 0 ? "+" : "-"}$${Math.abs(Math.round(summary.usPnL))}` : "—", c: summary.usPnL >= 0 ? UP : DOWN },
           ].map((b, i) => (
             <div key={i} style={{ background: "#10151f", border: "1px solid #1a2130", borderRadius: 8, padding: "9px 4px", textAlign: "center" }}>
               <div style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 16, fontWeight: 600, color: b.c }}>{b.v}</div>
@@ -379,27 +378,52 @@ function CapTerminal() {
           ))}
         </div>
 
-        {/* 투자원금·평가 요약 */}
+        {/* 투자원금 · 평가금액 · 손익 요약 */}
         {(summary.krCost > 0 || summary.usCost > 0) && (
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 6, marginBottom: 16 }}>
-            {summary.krCost > 0 && (
-              <div style={{ background: "#10151f", border: "1px solid #1a2130", borderRadius: 8, padding: "8px 10px" }}>
-                <div style={{ fontSize: 9, color: "#5b6677", fontFamily: "'IBM Plex Sans KR',sans-serif" }}>{"\u{1F1F0}\u{1F1F7}"} 투자원금</div>
-                <div style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 13, fontWeight: 600, color: "#8a93a6", marginTop: 2 }}>{Math.round(summary.krCost / 10000).toLocaleString("ko-KR")}만</div>
-                <div style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 11, color: summary.krPnL >= 0 ? UP : DOWN, marginTop: 1 }}>
-                  평가 {Math.round(summary.krVal / 10000).toLocaleString("ko-KR")}만
+          <div style={{ background: "#10151f", border: "1px solid #1a2130", borderRadius: 10, padding: "12px 14px", marginBottom: 16 }}>
+            <div style={{ fontSize: 11, color: "#5b6677", fontFamily: "'IBM Plex Sans KR',sans-serif", marginBottom: 10, fontWeight: 500 }}>
+              \u{1F4B0} 보유 포트폴리오
+            </div>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 10 }}>
+              {summary.krCost > 0 && (
+                <div>
+                  <div style={{ fontSize: 10, color: "#5b6677", fontFamily: "'IBM Plex Sans KR',sans-serif", marginBottom: 4 }}>{"\u{1F1F0}\u{1F1F7}"} 한국</div>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
+                    <span style={{ fontSize: 10, color: "#6b7689", fontFamily: "'IBM Plex Sans KR',sans-serif" }}>원금</span>
+                    <span style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 13, fontWeight: 600, color: "#8a93a6" }}>{Math.round(summary.krCost / 10000).toLocaleString("ko-KR")}만</span>
+                  </div>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginTop: 3 }}>
+                    <span style={{ fontSize: 10, color: "#6b7689", fontFamily: "'IBM Plex Sans KR',sans-serif" }}>평가</span>
+                    <span style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 13, fontWeight: 600, color: "#e9edf4" }}>{Math.round(summary.krVal / 10000).toLocaleString("ko-KR")}만</span>
+                  </div>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginTop: 3, paddingTop: 4, borderTop: "1px solid #1a2130" }}>
+                    <span style={{ fontSize: 10, color: "#6b7689", fontFamily: "'IBM Plex Sans KR',sans-serif" }}>손익</span>
+                    <span style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 14, fontWeight: 700, color: summary.krPnL >= 0 ? UP : DOWN }}>
+                      {summary.krPnL >= 0 ? "+" : "-"}{Math.abs(Math.round(summary.krPnL / 10000)).toLocaleString("ko-KR")}만
+                    </span>
+                  </div>
                 </div>
-              </div>
-            )}
-            {summary.usCost > 0 && (
-              <div style={{ background: "#10151f", border: "1px solid #1a2130", borderRadius: 8, padding: "8px 10px" }}>
-                <div style={{ fontSize: 9, color: "#5b6677", fontFamily: "'IBM Plex Sans KR',sans-serif" }}>{"\u{1F1FA}\u{1F1F8}"} 투자원금</div>
-                <div style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 13, fontWeight: 600, color: "#8a93a6", marginTop: 2 }}>${Math.round(summary.usCost).toLocaleString("en-US")}</div>
-                <div style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 11, color: summary.usPnL >= 0 ? UP : DOWN, marginTop: 1 }}>
-                  평가 ${Math.round(summary.usVal).toLocaleString("en-US")}
+              )}
+              {summary.usCost > 0 && (
+                <div style={summary.krCost > 0 ? { borderLeft: "1px solid #1a2130", paddingLeft: 10 } : {}}>
+                  <div style={{ fontSize: 10, color: "#5b6677", fontFamily: "'IBM Plex Sans KR',sans-serif", marginBottom: 4 }}>{"\u{1F1FA}\u{1F1F8}"} 미국</div>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline" }}>
+                    <span style={{ fontSize: 10, color: "#6b7689", fontFamily: "'IBM Plex Sans KR',sans-serif" }}>원금</span>
+                    <span style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 13, fontWeight: 600, color: "#8a93a6" }}>${Math.round(summary.usCost).toLocaleString("en-US")}</span>
+                  </div>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginTop: 3 }}>
+                    <span style={{ fontSize: 10, color: "#6b7689", fontFamily: "'IBM Plex Sans KR',sans-serif" }}>평가</span>
+                    <span style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 13, fontWeight: 600, color: "#e9edf4" }}>${Math.round(summary.usVal).toLocaleString("en-US")}</span>
+                  </div>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginTop: 3, paddingTop: 4, borderTop: "1px solid #1a2130" }}>
+                    <span style={{ fontSize: 10, color: "#6b7689", fontFamily: "'IBM Plex Sans KR',sans-serif" }}>손익</span>
+                    <span style={{ fontFamily: "'IBM Plex Mono',monospace", fontSize: 14, fontWeight: 700, color: summary.usPnL >= 0 ? UP : DOWN }}>
+                      {summary.usPnL >= 0 ? "+" : "-"}${Math.abs(Math.round(summary.usPnL)).toLocaleString("en-US")}
+                    </span>
+                  </div>
                 </div>
-              </div>
-            )}
+              )}
+            </div>
           </div>
         )}
 
