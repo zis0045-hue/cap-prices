@@ -51,9 +51,22 @@ for code, suf in KR:
         out.append({"ticker": code, "price": None, "err": str(e)[:80]})
     time.sleep(0.5)
 
+# USD/KRW 환율 수집
+fx_rate = None
+try:
+    fx_df = yf.Ticker("KRW=X").history(period="5d")
+    if len(fx_df) >= 1:
+        fx_rate = round(float(fx_df["Close"].iloc[-1]), 2)
+except Exception as e:
+    print("FX fetch error:", str(e)[:80])
+
 with open("prices.json", "w", encoding="utf-8") as f:
     json.dump(
-        {"updated": datetime.datetime.utcnow().isoformat() + "Z", "data": out},
+        {
+            "updated": datetime.datetime.utcnow().isoformat() + "Z",
+            "fx": {"USDKRW": fx_rate},
+            "data": out,
+        },
         f,
         ensure_ascii=False,
         indent=2,

@@ -4,7 +4,7 @@
   "us": [
     { "t": "GEV",  "n": "GE Vernova",   "cat": "entry", "tag": "B·T1",    "entry": [[1000,1050],[850,950]], "chase": 1200, "avg": null,  "stop": 900,  "qty": 0,   "note": "1차 타점 내·재예약 대기" },
     { "t": "CRDO", "n": "Credo",        "cat": "entry", "tag": "B·T2",    "entry": [[160,170],[140,150]],   "chase": 200,  "avg": null,  "stop": null, "qty": 0,   "note": "어닝 6/1" },
-    { "t": "AVGO", "n": "Broadcom",     "cat": "holdB", "tag": "B등급",   "entry": null,                    "chase": null, "avg": 419,   "stop": 356,  "qty": 5,   "note": "6월 500만 확대" },
+    { "t": "AVGO", "n": "Broadcom",     "cat": "holdB", "tag": "B등급",   "entry": null,                    "chase": null, "avg": 419,   "stop": 356,  "qty": 5,   "fx": 1450.80, "note": "6월 500만 확대" },
     { "t": "DELL", "n": "Dell",         "cat": "entry", "tag": "워치",    "entry": [[220,235],[195,210],[175,190]], "chase": 245, "avg": null, "stop": null, "qty": 0, "note": "어닝 5/28·추격금지 돌파" },
     { "t": "BE",   "n": "Bloom Energy", "cat": "entry", "tag": "T3",      "entry": null,                    "chase": null, "avg": null,  "stop": null, "qty": 0,   "note": "Lottery 관찰" },
     { "t": "INTC", "n": "Intel",        "cat": "entry", "tag": "워치후보","entry": null,                    "chase": null, "avg": null,  "stop": null, "qty": 0,   "note": "PC 부활 가설" }
