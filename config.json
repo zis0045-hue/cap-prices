@@ -1,22 +1,26 @@
 {
-  "updated": "2026-05-22",
-  "note": "종목 설정(평단·타점·손절·등급·수량). 가격은 prices.json이 담당. 종목 추가/제거/타점 변경은 이 파일만 편집하면 됨.",
+  "updated": "2026-05-25",
+  "note": "종목 설정(평단·타점·손절·등급·수량). 가격은 prices.json이 담당. 종목 추가/제거/타점 변경은 이 파일만 편집하면 됨. 수량·평단은 전포트 노션이 권위.",
   "us": [
-    { "t": "GEV",  "n": "GE Vernova",   "cat": "entry", "tag": "B·T1",    "entry": [[1000,1050],[850,950]], "chase": 1200, "avg": null,  "stop": 900,  "qty": 0,   "note": "1차 타점 내·재예약 대기" },
-    { "t": "CRDO", "n": "Credo",        "cat": "entry", "tag": "B·T2",    "entry": [[160,170],[140,150]],   "chase": 200,  "avg": null,  "stop": null, "qty": 0,   "note": "어닝 6/1" },
-    { "t": "AVGO", "n": "Broadcom",     "cat": "holdB", "tag": "B등급",   "entry": null,                    "chase": null, "avg": 419,   "stop": 356,  "qty": 5,   "fx": 1450.80, "note": "6월 500만 확대" },
-    { "t": "DELL", "n": "Dell",         "cat": "entry", "tag": "워치",    "entry": [[220,235],[195,210],[175,190]], "chase": 245, "avg": null, "stop": null, "qty": 0, "note": "어닝 5/28·추격금지 돌파" },
-    { "t": "BE",   "n": "Bloom Energy", "cat": "entry", "tag": "T3",      "entry": null,                    "chase": null, "avg": null,  "stop": null, "qty": 0,   "note": "Lottery 관찰" },
-    { "t": "INTC", "n": "Intel",        "cat": "entry", "tag": "워치후보","entry": null,                    "chase": null, "avg": null,  "stop": null, "qty": 0,   "note": "PC 부활 가설" }
+    { "t": "GEV",  "n": "GE Vernova",   "cat": "entry", "tag": "B·T1",      "entry": [[1000,1050],[850,950]],          "chase": 1200, "avg": 1047, "stop": 900,  "qty": 1, "note": "1차 1주 진입·2차 풀백 대기" },
+    { "t": "SJ",   "n": "스텔라-존스",  "cat": "entry", "tag": "B·T1",      "entry": [[72,75],[68,70]],                "chase": 85,   "avg": null, "stop": 66,   "qty": 0, "note": "TSX·C$ 표시주의·전력망 뒷단" },
+    { "t": "CRDO", "n": "Credo",        "cat": "entry", "tag": "B·T2",      "entry": [[160,170],[140,150]],            "chase": 200,  "avg": null, "stop": null, "qty": 0, "note": "어닝 6/1" },
+    { "t": "DELL", "n": "Dell",         "cat": "entry", "tag": "워치",      "entry": [[220,235],[195,210],[175,190]],  "chase": 245,  "avg": null, "stop": null, "qty": 0, "note": "어닝 5/28" },
+    { "t": "KOP",  "n": "코퍼스 홀딩스","cat": "entry", "tag": "B·T2",      "entry": null,                            "chase": null, "avg": null, "stop": null, "qty": 0, "note": "CMC 분사 catalyst·저평가" },
+    { "t": "VMI",  "n": "발몬트",       "cat": "entry", "tag": "B·T2",      "entry": null,                            "chase": null, "avg": null, "stop": null, "qty": 0, "note": "6/16 Investor Day·풀백 대기" },
+    { "t": "ON",   "n": "onsemi",       "cat": "entry", "tag": "B·T2·정찰", "entry": [[95,105]],                      "chase": 120,  "avg": null, "stop": 86,   "qty": 0, "note": "정찰 100만(~$116) 가능·주력 풀백" },
+    { "t": "AVGO", "n": "Broadcom",     "cat": "holdB", "tag": "B등급",     "entry": null,                            "chase": null, "avg": 419,  "stop": 356,  "qty": 5, "fx": 1450.80, "note": "6월 500만 확대" },
+    { "t": "BE",   "n": "Bloom Energy", "cat": "entry", "tag": "T3",        "entry": null,                            "chase": null, "avg": null, "stop": null, "qty": 0, "note": "Lottery 관찰" },
+    { "t": "COHR", "n": "Coherent",     "cat": "entry", "tag": "T3",        "entry": null,                            "chase": null, "avg": null, "stop": null, "qty": 0, "note": "InP 고밸류 관찰·풀백 시 재평가" }
   ],
   "kr": [
-    { "t": "010060", "n": "OCI홀딩스",          "cat": "holdB", "tag": "B등급",   "entry": null, "chase": null, "avg": 327000, "stop": null, "qty": 7,   "note": "1Q26 실적 갈림길·홀드" },
-    { "t": "000660", "n": "SK하이닉스",         "cat": "core",  "tag": "사실상A", "entry": null, "chase": null, "avg": null,   "stop": null, "qty": 12,  "note": "DCA 가격제한 185만" },
-    { "t": "005930", "n": "삼성전자",           "cat": "core",  "tag": "A등급",   "entry": null, "chase": null, "avg": null,   "stop": null, "qty": 20,  "note": "5/22 B→A 승격·DCA 주1(금)" },
-    { "t": "017670", "n": "SKT",                "cat": "core",  "tag": "A등급",   "entry": null, "chase": null, "avg": 87532,  "stop": null, "qty": 92,  "note": "DCA 1주/일" },
-    { "t": "487240", "n": "KODEX AI전력핵심설비","cat": "core",  "tag": "ETF",    "entry": null, "chase": null, "avg": 32676,  "stop": null, "qty": 331, "note": "DCA 1주/일(일시1주)" },
-    { "t": "329180", "n": "HD현대중공업",       "cat": "entry", "tag": "워치·T1", "entry": [[640000,660000],[590000,610000]], "chase": 700000, "avg": null, "stop": null, "qty": 0, "note": "진입 보류" },
-    { "t": "006400", "n": "삼성SDI",            "cat": "entry", "tag": "T2",      "entry": null, "chase": null, "avg": null,   "stop": null, "qty": 0,   "note": "" },
-    { "t": "009150", "n": "삼성전기",           "cat": "entry", "tag": "T2",      "entry": null, "chase": null, "avg": null,   "stop": null, "qty": 0,   "note": "6월 로테이션" }
+    { "t": "010060", "n": "OCI홀딩스",          "cat": "holdB", "tag": "B등급",   "entry": null,                                              "chase": null,   "avg": 327000, "stop": null,   "qty": 7,   "note": "OCI 6월 결판·홀드" },
+    { "t": "004020", "n": "현대제철",          "cat": "entry", "tag": "B·T1",    "entry": [[38000,40000]],                                   "chase": null,   "avg": null,   "stop": null,   "qty": 0,   "note": "경로A 눌림 대기·6/17 K-스틸법·1차 300~500만" },
+    { "t": "329180", "n": "HD현대중공업",      "cat": "entry", "tag": "워치·T1", "entry": [[640000,660000],[590000,610000],[540000,570000]], "chase": 700000, "avg": null,   "stop": 552000, "qty": 0,   "note": "진입 보류·3차까지" },
+    { "t": "009150", "n": "삼성전기",          "cat": "entry", "tag": "T2",      "entry": null,                                              "chase": null,   "avg": null,   "stop": null,   "qty": 0,   "note": "6월 로테이션·타점 재설계" },
+    { "t": "000660", "n": "SK하이닉스",        "cat": "core",  "tag": "사실상A", "entry": null,                                              "chase": null,   "avg": 953942, "stop": null,   "qty": 15,  "note": "DCA 가격제한 185만" },
+    { "t": "005930", "n": "삼성전자",          "cat": "core",  "tag": "A등급",   "entry": null,                                              "chase": null,   "avg": 196125, "stop": null,   "qty": 23,  "note": "5/22 B→A 승격·DCA 주1(금)" },
+    { "t": "017670", "n": "SKT",                "cat": "core",  "tag": "A등급",   "entry": null,                                              "chase": null,   "avg": 89097,  "stop": null,   "qty": 96,  "note": "DCA 1주/일" },
+    { "t": "487240", "n": "KODEX AI전력핵심설비","cat": "core",  "tag": "ETF",    "entry": null,                                              "chase": null,   "avg": 32848,  "stop": null,   "qty": 334, "note": "DCA 1주/일(일시1주)" }
   ]
 }
