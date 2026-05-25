@@ -4,17 +4,17 @@ import json, datetime, time, warnings
 
 warnings.filterwarnings("ignore")
 
-US = ["GEV", "CRDO", "AVGO", "DELL", "BE", "INTC"]
+US = ["GEV", "CRDO", "AVGO", "DELL", "BE", "KOP", "VMI", "ON", "COHR"]
 
 # (코드, 야후접미사) — 코스닥=.KQ, 코스피=.KS
 KR = [
     ("010060", ".KS"),
+    ("004020", ".KS"),
     ("000660", ".KS"),
     ("005930", ".KS"),
     ("017670", ".KS"),
     ("487240", ".KS"),
     ("329180", ".KS"),
-    ("006400", ".KS"),
     ("009150", ".KS"),
 ]
 
@@ -36,6 +36,20 @@ for t in US:
     except Exception as e:
         out.append({"ticker": t, "price": None, "err": str(e)[:80]})
     time.sleep(0.5)
+
+# SJ (스텔라-존스, TSX·캐나다달러) — yfinance로 수집
+try:
+    df = yf.Ticker("SJ.TO").history(period="7d")
+    out.append({
+        "ticker": "SJ",
+        "price": round(float(df["Close"].iloc[-1]), 2),
+        "prevClose": round(float(df["Close"].iloc[-2]), 2),
+        "date": str(df.index[-1].date()),
+        "currency": "CAD",
+    })
+except Exception as e:
+    out.append({"ticker": "SJ", "price": None, "err": str(e)[:80]})
+time.sleep(0.5)
 
 for code, suf in KR:
     try:
