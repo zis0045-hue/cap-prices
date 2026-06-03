@@ -1,7 +1,7 @@
 {
-  "updated": "2026-06-02T23:05:54.694845Z",
+  "updated": "2026-06-03T11:49:41.067354Z",
   "fx": {
-    "USDKRW": 1511.27
+    "USDKRW": 1524.45
   },
   "data": [
     {
@@ -70,7 +70,7 @@
     {
       "ticker": "SJ",
       "price": 77.37,
-      "prevClose": 78.72,
+      "prevClose": 78.38,
       "date": "2026-06-02",
       "currency": "CAD"
     },
