@@ -1,7 +1,7 @@
 {
-  "updated": "2026-06-19T11:10:02.110801Z",
+  "updated": "2026-06-19T22:11:13.898147Z",
   "fx": {
-    "USDKRW": 1530.44
+    "USDKRW": 1529.89
   },
   "data": [
     {
@@ -41,14 +41,14 @@
     },
     {
       "ticker": "KOP",
-      "price": 43.73,
+      "price": NaN,
       "prevClose": 43.65,
       "date": "2026-06-18",
       "currency": "USD"
     },
     {
       "ticker": "VMI",
-      "price": 570.31,
+      "price": NaN,
       "prevClose": 565.31,
       "date": "2026-06-18",
       "currency": "USD"
@@ -69,9 +69,9 @@
     },
     {
       "ticker": "SJ",
-      "price": 82.36,
+      "price": 81.83,
       "prevClose": 82.15,
-      "date": "2026-06-18",
+      "date": "2026-06-19",
       "currency": "CAD"
     },
     {
