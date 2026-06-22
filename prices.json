@@ -1,7 +1,7 @@
 {
-  "updated": "2026-06-19T22:11:13.898147Z",
+  "updated": "2026-06-22T12:39:53.781471Z",
   "fx": {
-    "USDKRW": 1529.89
+    "USDKRW": 1537.37
   },
   "data": [
     {
@@ -41,14 +41,14 @@
     },
     {
       "ticker": "KOP",
-      "price": NaN,
+      "price": 43.73,
       "prevClose": 43.65,
       "date": "2026-06-18",
       "currency": "USD"
     },
     {
       "ticker": "VMI",
-      "price": NaN,
+      "price": 570.31,
       "prevClose": 565.31,
       "date": "2026-06-18",
       "currency": "USD"
@@ -70,64 +70,64 @@
     {
       "ticker": "SJ",
       "price": 81.83,
-      "prevClose": 82.15,
+      "prevClose": 82.36,
       "date": "2026-06-19",
       "currency": "CAD"
     },
     {
       "ticker": "010060",
-      "price": 256500,
-      "prevClose": 271500,
-      "date": "2026-06-19",
+      "price": 247000,
+      "prevClose": 256500,
+      "date": "2026-06-22",
       "currency": "KRW"
     },
     {
       "ticker": "004020",
-      "price": 32750,
-      "prevClose": 33350,
-      "date": "2026-06-19",
+      "price": 31050,
+      "prevClose": 32750,
+      "date": "2026-06-22",
       "currency": "KRW"
     },
     {
       "ticker": "000660",
-      "price": 2764000,
-      "prevClose": 2685000,
-      "date": "2026-06-19",
+      "price": 2919000,
+      "prevClose": 2764000,
+      "date": "2026-06-22",
       "currency": "KRW"
     },
     {
       "ticker": "005930",
-      "price": 354000,
-      "prevClose": 362500,
-      "date": "2026-06-19",
+      "price": 353500,
+      "prevClose": 354000,
+      "date": "2026-06-22",
       "currency": "KRW"
     },
     {
       "ticker": "017670",
-      "price": 94900,
-      "prevClose": 95900,
-      "date": "2026-06-19",
+      "price": 94200,
+      "prevClose": 94900,
+      "date": "2026-06-22",
       "currency": "KRW"
     },
     {
       "ticker": "487240",
-      "price": 46485,
-      "prevClose": 46145,
-      "date": "2026-06-19",
+      "price": 44975,
+      "prevClose": 46485,
+      "date": "2026-06-22",
       "currency": "KRW"
     },
     {
       "ticker": "329180",
-      "price": 667000,
-      "prevClose": 684000,
-      "date": "2026-06-19",
+      "price": 636000,
+      "prevClose": 667000,
+      "date": "2026-06-22",
       "currency": "KRW"
     },
     {
       "ticker": "009150",
-      "price": 2270000,
-      "prevClose": 2200000,
-      "date": "2026-06-19",
+      "price": 2228000,
+      "prevClose": 2270000,
+      "date": "2026-06-22",
       "currency": "KRW"
     }
   ]
