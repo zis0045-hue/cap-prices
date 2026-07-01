@@ -1,70 +1,70 @@
 {
-  "updated": "2026-07-01T10:35:53.098849Z",
+  "updated": "2026-07-01T22:23:34.251599Z",
   "fx": {
-    "USDKRW": 1557.76
+    "USDKRW": 1553.23
   },
   "data": [
     {
       "ticker": "GEV",
-      "price": 1174.86,
-      "prevClose": 1102.51,
-      "date": "2026-06-30",
+      "price": 1134.35,
+      "prevClose": 1174.86,
+      "date": "2026-07-01",
       "currency": "USD"
     },
     {
       "ticker": "CRDO",
-      "price": 271.95,
-      "prevClose": 245.68,
-      "date": "2026-06-30",
+      "price": 259.09,
+      "prevClose": 271.95,
+      "date": "2026-07-01",
       "currency": "USD"
     },
     {
       "ticker": "AVGO",
-      "price": 377.75,
-      "prevClose": 372.45,
-      "date": "2026-06-30",
+      "price": 369.34,
+      "prevClose": 377.75,
+      "date": "2026-07-01",
       "currency": "USD"
     },
     {
       "ticker": "DELL",
-      "price": 431.46,
-      "prevClose": 414.61,
-      "date": "2026-06-30",
+      "price": 425.25,
+      "prevClose": 431.46,
+      "date": "2026-07-01",
       "currency": "USD"
     },
     {
       "ticker": "BE",
-      "price": 302.7,
-      "prevClose": 275.01,
-      "date": "2026-06-30",
+      "price": 289.5,
+      "prevClose": 302.7,
+      "date": "2026-07-01",
       "currency": "USD"
     },
     {
       "ticker": "KOP",
-      "price": 44.9,
-      "prevClose": 45.36,
-      "date": "2026-06-30",
+      "price": 44.56,
+      "prevClose": 44.9,
+      "date": "2026-07-01",
       "currency": "USD"
     },
     {
       "ticker": "VMI",
-      "price": 577.6,
-      "prevClose": 573.37,
-      "date": "2026-06-30",
+      "price": 559.02,
+      "prevClose": 577.6,
+      "date": "2026-07-01",
       "currency": "USD"
     },
     {
       "ticker": "ON",
-      "price": 94.54,
-      "prevClose": 88.57,
-      "date": "2026-06-30",
+      "price": 94.63,
+      "prevClose": 94.54,
+      "date": "2026-07-01",
       "currency": "USD"
     },
     {
       "ticker": "COHR",
-      "price": 394.47,
-      "prevClose": 391.22,
-      "date": "2026-06-30",
+      "price": 368.65,
+      "prevClose": 394.47,
+      "date": "2026-07-01",
       "currency": "USD"
     },
     {
