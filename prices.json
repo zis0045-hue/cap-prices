@@ -1,7 +1,7 @@
 {
-  "updated": "2026-07-09T22:37:54.219485Z",
+  "updated": "2026-07-10T10:12:34.755058Z",
   "fx": {
-    "USDKRW": 1505.81
+    "USDKRW": 1504.64
   },
   "data": [
     {
@@ -76,58 +76,58 @@
     },
     {
       "ticker": "010060",
-      "price": 183200,
-      "prevClose": 180500,
-      "date": "2026-07-09",
+      "price": 197800,
+      "prevClose": 183200,
+      "date": "2026-07-10",
       "currency": "KRW"
     },
     {
       "ticker": "004020",
-      "price": 26000,
-      "prevClose": 26900,
-      "date": "2026-07-09",
+      "price": 26900,
+      "prevClose": 26000,
+      "date": "2026-07-10",
       "currency": "KRW"
     },
     {
       "ticker": "000660",
-      "price": 2186000,
-      "prevClose": 2076000,
-      "date": "2026-07-09",
+      "price": 2180000,
+      "prevClose": 2186000,
+      "date": "2026-07-10",
       "currency": "KRW"
     },
     {
       "ticker": "005930",
-      "price": 278000,
-      "prevClose": 277500,
-      "date": "2026-07-09",
+      "price": 285000,
+      "prevClose": 278000,
+      "date": "2026-07-10",
       "currency": "KRW"
     },
     {
       "ticker": "017670",
-      "price": 86700,
-      "prevClose": 84000,
-      "date": "2026-07-09",
+      "price": 88700,
+      "prevClose": 86700,
+      "date": "2026-07-10",
       "currency": "KRW"
     },
     {
       "ticker": "487240",
-      "price": 35020,
-      "prevClose": 34400,
-      "date": "2026-07-09",
+      "price": 37300,
+      "prevClose": 35020,
+      "date": "2026-07-10",
       "currency": "KRW"
     },
     {
       "ticker": "329180",
-      "price": 507000,
-      "prevClose": 517000,
-      "date": "2026-07-09",
+      "price": 504000,
+      "prevClose": 507000,
+      "date": "2026-07-10",
       "currency": "KRW"
     },
     {
       "ticker": "009150",
-      "price": 1493000,
-      "prevClose": 1479000,
-      "date": "2026-07-09",
+      "price": 1584000,
+      "prevClose": 1493000,
+      "date": "2026-07-10",
       "currency": "KRW"
     }
   ]
