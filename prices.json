@@ -1,77 +1,77 @@
 {
-  "updated": "2026-07-22T09:19:30.624126Z",
+  "updated": "2026-07-22T22:11:29.685267Z",
   "fx": {
-    "USDKRW": 1479.2
+    "USDKRW": 1477.31
   },
   "data": [
     {
       "ticker": "GEV",
-      "price": 1078.81,
-      "prevClose": 1079.18,
-      "date": "2026-07-21",
+      "price": 985.03,
+      "prevClose": 1078.81,
+      "date": "2026-07-22",
       "currency": "USD"
     },
     {
       "ticker": "CRDO",
-      "price": 223.87,
-      "prevClose": 212.07,
-      "date": "2026-07-21",
+      "price": 228.27,
+      "prevClose": 223.87,
+      "date": "2026-07-22",
       "currency": "USD"
     },
     {
       "ticker": "AVGO",
-      "price": 386.5,
-      "prevClose": 378.16,
-      "date": "2026-07-21",
+      "price": 396.81,
+      "prevClose": 386.5,
+      "date": "2026-07-22",
       "currency": "USD"
     },
     {
       "ticker": "DELL",
-      "price": 404.15,
-      "prevClose": 381.88,
-      "date": "2026-07-21",
+      "price": 441.8,
+      "prevClose": 404.15,
+      "date": "2026-07-22",
       "currency": "USD"
     },
     {
       "ticker": "BE",
-      "price": 226.26,
-      "prevClose": 197.06,
-      "date": "2026-07-21",
+      "price": 218.22,
+      "prevClose": 226.26,
+      "date": "2026-07-22",
       "currency": "USD"
     },
     {
       "ticker": "KOP",
-      "price": 51.47,
-      "prevClose": 49.2,
-      "date": "2026-07-21",
+      "price": 51.17,
+      "prevClose": 51.47,
+      "date": "2026-07-22",
       "currency": "USD"
     },
     {
       "ticker": "VMI",
-      "price": 505.35,
-      "prevClose": 525.88,
-      "date": "2026-07-21",
+      "price": 487.5,
+      "prevClose": 505.35,
+      "date": "2026-07-22",
       "currency": "USD"
     },
     {
       "ticker": "ON",
-      "price": 91.06,
-      "prevClose": 86.7,
-      "date": "2026-07-21",
+      "price": 92.33,
+      "prevClose": 91.06,
+      "date": "2026-07-22",
       "currency": "USD"
     },
     {
       "ticker": "COHR",
-      "price": 317.22,
-      "prevClose": 285.4,
-      "date": "2026-07-21",
+      "price": 312.19,
+      "prevClose": 317.22,
+      "date": "2026-07-22",
       "currency": "USD"
     },
     {
       "ticker": "SJ",
-      "price": 76.64,
-      "prevClose": 77.49,
-      "date": "2026-07-21",
+      "price": 76.7,
+      "prevClose": 76.64,
+      "date": "2026-07-22",
       "currency": "CAD"
     },
     {
