@@ -1,133 +1,133 @@
 {
-  "updated": "2026-08-06T09:33:00.212347Z",
+  "updated": "2026-08-07T01:01:52.838996Z",
   "fx": {
-    "USDKRW": 1423.95
+    "USDKRW": 1421.18
   },
   "data": [
     {
       "ticker": "GEV",
-      "price": 1017.96,
-      "prevClose": 1018.53,
-      "date": "2026-08-05",
+      "price": 1000.3,
+      "prevClose": 1017.96,
+      "date": "2026-08-06",
       "currency": "USD"
     },
     {
       "ticker": "CRDO",
-      "price": 224.63,
-      "prevClose": 237.92,
-      "date": "2026-08-05",
+      "price": 230.43,
+      "prevClose": 224.63,
+      "date": "2026-08-06",
       "currency": "USD"
     },
     {
       "ticker": "AVGO",
-      "price": 418.28,
-      "prevClose": 418.16,
-      "date": "2026-08-05",
+      "price": 420.57,
+      "prevClose": 418.28,
+      "date": "2026-08-06",
       "currency": "USD"
     },
     {
       "ticker": "DELL",
-      "price": 462.7,
-      "prevClose": 467.27,
-      "date": "2026-08-05",
+      "price": 437.65,
+      "prevClose": 462.7,
+      "date": "2026-08-06",
       "currency": "USD"
     },
     {
       "ticker": "BE",
-      "price": 234.33,
-      "prevClose": 228.11,
-      "date": "2026-08-05",
+      "price": 228.96,
+      "prevClose": 234.33,
+      "date": "2026-08-06",
       "currency": "USD"
     },
     {
       "ticker": "KOP",
-      "price": 51.03,
-      "prevClose": 51.99,
-      "date": "2026-08-05",
+      "price": 52.33,
+      "prevClose": 51.03,
+      "date": "2026-08-06",
       "currency": "USD"
     },
     {
       "ticker": "VMI",
-      "price": 496.4,
-      "prevClose": 503.5,
-      "date": "2026-08-05",
+      "price": 491.91,
+      "prevClose": 496.4,
+      "date": "2026-08-06",
       "currency": "USD"
     },
     {
       "ticker": "ON",
-      "price": 76.91,
-      "prevClose": 80.78,
-      "date": "2026-08-05",
+      "price": 78.33,
+      "prevClose": 76.91,
+      "date": "2026-08-06",
       "currency": "USD"
     },
     {
       "ticker": "COHR",
-      "price": 328.22,
-      "prevClose": 323.73,
-      "date": "2026-08-05",
+      "price": 334.22,
+      "prevClose": 328.22,
+      "date": "2026-08-06",
       "currency": "USD"
     },
     {
       "ticker": "SJ",
-      "price": 79.18,
+      "price": 74.62,
       "prevClose": 79.18,
-      "date": "2026-08-05",
+      "date": "2026-08-06",
       "currency": "CAD"
     },
     {
       "ticker": "010060",
-      "price": 244000,
-      "prevClose": 246000,
-      "date": "2026-08-06",
+      "price": 257000,
+      "prevClose": 244000,
+      "date": "2026-08-07",
       "currency": "KRW"
     },
     {
       "ticker": "004020",
-      "price": 28150,
-      "prevClose": 27650,
-      "date": "2026-08-06",
+      "price": 28100,
+      "prevClose": 28150,
+      "date": "2026-08-07",
       "currency": "KRW"
     },
     {
       "ticker": "000660",
-      "price": 1495000,
-      "prevClose": 1668000,
-      "date": "2026-08-06",
+      "price": 1458000,
+      "prevClose": 1495000,
+      "date": "2026-08-07",
       "currency": "KRW"
     },
     {
       "ticker": "005930",
-      "price": 230500,
-      "prevClose": 246000,
-      "date": "2026-08-06",
+      "price": 232500,
+      "prevClose": 230500,
+      "date": "2026-08-07",
       "currency": "KRW"
     },
     {
       "ticker": "017670",
-      "price": 91100,
-      "prevClose": 93000,
-      "date": "2026-08-06",
+      "price": 90100,
+      "prevClose": 91100,
+      "date": "2026-08-07",
       "currency": "KRW"
     },
     {
       "ticker": "487240",
-      "price": 34730,
-      "prevClose": 36435,
-      "date": "2026-08-06",
+      "price": 34450,
+      "prevClose": 34730,
+      "date": "2026-08-07",
       "currency": "KRW"
     },
     {
       "ticker": "329180",
-      "price": 507000,
-      "prevClose": 509000,
-      "date": "2026-08-06",
+      "price": 493000,
+      "prevClose": 507000,
+      "date": "2026-08-07",
       "currency": "KRW"
     },
     {
       "ticker": "009150",
-      "price": 1229000,
-      "prevClose": 1356000,
-      "date": "2026-08-06",
+      "price": 1237000,
+      "prevClose": 1229000,
+      "date": "2026-08-07",
       "currency": "KRW"
     }
   ]
