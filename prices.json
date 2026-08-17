@@ -1,7 +1,7 @@
 {
-  "updated": "2026-08-14T21:31:39.697327Z",
+  "updated": "2026-08-17T07:40:47.179473Z",
   "fx": {
-    "USDKRW": 1416.48
+    "USDKRW": 1411.43
   },
   "data": [
     {
@@ -76,28 +76,38 @@
     },
     {
       "ticker": "010060",
-      "price": null,
-      "err": "cannot convert float NaN to integer"
+      "price": 279000,
+      "prevClose": 278000,
+      "date": "2026-08-14",
+      "currency": "KRW"
     },
     {
       "ticker": "004020",
-      "price": null,
-      "err": "cannot convert float NaN to integer"
+      "price": 29900,
+      "prevClose": 28800,
+      "date": "2026-08-14",
+      "currency": "KRW"
     },
     {
       "ticker": "000660",
-      "price": null,
-      "err": "cannot convert float NaN to integer"
+      "price": 1645000,
+      "prevClose": 1593000,
+      "date": "2026-08-14",
+      "currency": "KRW"
     },
     {
       "ticker": "005930",
-      "price": null,
-      "err": "cannot convert float NaN to integer"
+      "price": 274500,
+      "prevClose": 268000,
+      "date": "2026-08-14",
+      "currency": "KRW"
     },
     {
       "ticker": "017670",
-      "price": null,
-      "err": "cannot convert float NaN to integer"
+      "price": 100500,
+      "prevClose": 91100,
+      "date": "2026-08-14",
+      "currency": "KRW"
     },
     {
       "ticker": "487240",
