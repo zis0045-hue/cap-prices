@@ -1,103 +1,113 @@
 {
-  "updated": "2026-08-28T19:06:40.848477Z",
+  "updated": "2026-08-29T03:07:57.106025Z",
   "fx": {
-    "USDKRW": 1378.95
+    "USDKRW": 1375.67
   },
   "data": [
     {
       "ticker": "GEV",
-      "price": 917.52,
+      "price": 911.93,
       "prevClose": 953.83,
       "date": "2026-08-28",
       "currency": "USD"
     },
     {
       "ticker": "CRDO",
-      "price": 232.39,
+      "price": 232.75,
       "prevClose": 240.24,
       "date": "2026-08-28",
       "currency": "USD"
     },
     {
       "ticker": "AVGO",
-      "price": 367.24,
+      "price": 368.79,
       "prevClose": 371.54,
       "date": "2026-08-28",
       "currency": "USD"
     },
     {
       "ticker": "DELL",
-      "price": 455.5,
+      "price": 456.24,
       "prevClose": 472.26,
       "date": "2026-08-28",
       "currency": "USD"
     },
     {
       "ticker": "BE",
-      "price": 212.25,
+      "price": 210.77,
       "prevClose": 217.83,
       "date": "2026-08-28",
       "currency": "USD"
     },
     {
       "ticker": "KOP",
-      "price": 46.37,
+      "price": 46.56,
       "prevClose": 46.32,
       "date": "2026-08-28",
       "currency": "USD"
     },
     {
       "ticker": "VMI",
-      "price": 474.67,
+      "price": 476.28,
       "prevClose": 480.53,
       "date": "2026-08-28",
       "currency": "USD"
     },
     {
       "ticker": "ON",
-      "price": 72.52,
+      "price": 72.61,
       "prevClose": 74.8,
       "date": "2026-08-28",
       "currency": "USD"
     },
     {
       "ticker": "COHR",
-      "price": 280.57,
+      "price": 279.2,
       "prevClose": 295.39,
       "date": "2026-08-28",
       "currency": "USD"
     },
     {
       "ticker": "SJ",
-      "price": 69.68,
+      "price": 69.56,
       "prevClose": 70.08,
       "date": "2026-08-28",
       "currency": "CAD"
     },
     {
       "ticker": "010060",
-      "price": null,
-      "err": "cannot convert float NaN to integer"
+      "price": 274500,
+      "prevClose": 276000,
+      "date": "2026-08-28",
+      "currency": "KRW"
     },
     {
       "ticker": "004020",
-      "price": null,
-      "err": "cannot convert float NaN to integer"
+      "price": 31000,
+      "prevClose": 31450,
+      "date": "2026-08-28",
+      "currency": "KRW"
     },
     {
       "ticker": "000660",
-      "price": null,
-      "err": "cannot convert float NaN to integer"
+      "price": 1653000,
+      "prevClose": 1729625,
+      "date": "2026-08-28",
+      "currency": "KRW"
     },
     {
       "ticker": "005930",
-      "price": null,
-      "err": "cannot convert float NaN to integer"
+      "price": 257000,
+      "prevClose": 266000,
+      "date": "2026-08-28",
+      "currency": "KRW"
     },
     {
       "ticker": "017670",
-      "price": null,
-      "err": "cannot convert float NaN to integer"
+      "price": 98600,
+      "prevClose": 98270,
+      "date": "2026-08-28",
+      "currency": "KRW"
     },
     {
       "ticker": "487240",
@@ -108,13 +118,17 @@
     },
     {
       "ticker": "329180",
-      "price": null,
-      "err": "cannot convert float NaN to integer"
+      "price": 457000,
+      "prevClose": 470000,
+      "date": "2026-08-28",
+      "currency": "KRW"
     },
     {
       "ticker": "009150",
-      "price": null,
-      "err": "cannot convert float NaN to integer"
+      "price": 1421000,
+      "prevClose": 1385000,
+      "date": "2026-08-28",
+      "currency": "KRW"
     }
   ]
 }
