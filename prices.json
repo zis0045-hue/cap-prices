@@ -1,77 +1,77 @@
 {
-  "updated": "2026-09-18T11:55:17.282353Z",
+  "updated": "2026-09-18T23:10:36.508924Z",
   "fx": {
-    "USDKRW": 1387.53
+    "USDKRW": 1385.95
   },
   "data": [
     {
       "ticker": "GEV",
-      "price": 924.93,
-      "prevClose": 925.09,
-      "date": "2026-09-17",
+      "price": 940.33,
+      "prevClose": 924.93,
+      "date": "2026-09-18",
       "currency": "USD"
     },
     {
       "ticker": "CRDO",
-      "price": 168.25,
-      "prevClose": 161.49,
-      "date": "2026-09-17",
+      "price": 175.89,
+      "prevClose": 168.25,
+      "date": "2026-09-18",
       "currency": "USD"
     },
     {
       "ticker": "AVGO",
-      "price": 347.3,
-      "prevClose": 339.51,
-      "date": "2026-09-17",
+      "price": 357.61,
+      "prevClose": 347.3,
+      "date": "2026-09-18",
       "currency": "USD"
     },
     {
       "ticker": "DELL",
-      "price": 588.4,
-      "prevClose": 563.29,
-      "date": "2026-09-17",
+      "price": 568.06,
+      "prevClose": 588.4,
+      "date": "2026-09-18",
       "currency": "USD"
     },
     {
       "ticker": "BE",
-      "price": 280.76,
-      "prevClose": 270.02,
-      "date": "2026-09-17",
+      "price": 265.63,
+      "prevClose": 280.76,
+      "date": "2026-09-18",
       "currency": "USD"
     },
     {
       "ticker": "KOP",
-      "price": 46.18,
-      "prevClose": 46.72,
-      "date": "2026-09-17",
+      "price": 45.33,
+      "prevClose": 46.18,
+      "date": "2026-09-18",
       "currency": "USD"
     },
     {
       "ticker": "VMI",
-      "price": 472.43,
-      "prevClose": 475.35,
-      "date": "2026-09-17",
+      "price": 474.64,
+      "prevClose": 472.43,
+      "date": "2026-09-18",
       "currency": "USD"
     },
     {
       "ticker": "ON",
-      "price": 68.3,
-      "prevClose": 66.6,
-      "date": "2026-09-17",
+      "price": 69.98,
+      "prevClose": 68.3,
+      "date": "2026-09-18",
       "currency": "USD"
     },
     {
       "ticker": "COHR",
-      "price": 295.98,
-      "prevClose": 289.93,
-      "date": "2026-09-17",
+      "price": 317.36,
+      "prevClose": 295.98,
+      "date": "2026-09-18",
       "currency": "USD"
     },
     {
       "ticker": "SJ",
-      "price": 68.8,
-      "prevClose": 68.39,
-      "date": "2026-09-17",
+      "price": 69.46,
+      "prevClose": 68.8,
+      "date": "2026-09-18",
       "currency": "CAD"
     },
     {
