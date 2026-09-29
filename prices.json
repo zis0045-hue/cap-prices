@@ -1,68 +1,68 @@
 {
-  "updated": "2026-09-29T00:55:17.237293Z",
+  "updated": "2026-09-29T13:27:14.975940Z",
   "fx": {
-    "USDKRW": 1360.38
+    "USDKRW": 1355.05
   },
   "data": [
     {
       "ticker": "GEV",
-      "price": NaN,
+      "price": 949.77,
       "prevClose": 957.63,
       "date": "2026-09-28",
       "currency": "USD"
     },
     {
       "ticker": "CRDO",
-      "price": NaN,
+      "price": 192.67,
       "prevClose": 210.97,
       "date": "2026-09-28",
       "currency": "USD"
     },
     {
       "ticker": "AVGO",
-      "price": NaN,
+      "price": 349.57,
       "prevClose": 352.81,
       "date": "2026-09-28",
       "currency": "USD"
     },
     {
       "ticker": "DELL",
-      "price": NaN,
+      "price": 543.43,
       "prevClose": 562.89,
       "date": "2026-09-28",
       "currency": "USD"
     },
     {
       "ticker": "BE",
-      "price": NaN,
+      "price": 262.87,
       "prevClose": 288.7,
       "date": "2026-09-28",
       "currency": "USD"
     },
     {
       "ticker": "KOP",
-      "price": NaN,
+      "price": 46.17,
       "prevClose": 46.27,
       "date": "2026-09-28",
       "currency": "USD"
     },
     {
       "ticker": "VMI",
-      "price": NaN,
+      "price": 467.84,
       "prevClose": 466.83,
       "date": "2026-09-28",
       "currency": "USD"
     },
     {
       "ticker": "ON",
-      "price": NaN,
+      "price": 75.65,
       "prevClose": 77.2,
       "date": "2026-09-28",
       "currency": "USD"
     },
     {
       "ticker": "COHR",
-      "price": NaN,
+      "price": 282.45,
       "prevClose": 295.83,
       "date": "2026-09-28",
       "currency": "USD"
@@ -76,56 +76,56 @@
     },
     {
       "ticker": "010060",
-      "price": 219500,
+      "price": 216500,
       "prevClose": 228500,
       "date": "2026-09-29",
       "currency": "KRW"
     },
     {
       "ticker": "004020",
-      "price": 30200,
+      "price": 30000,
       "prevClose": 31250,
       "date": "2026-09-29",
       "currency": "KRW"
     },
     {
       "ticker": "000660",
-      "price": 1782000,
+      "price": 1765000,
       "prevClose": 1768000,
       "date": "2026-09-29",
       "currency": "KRW"
     },
     {
       "ticker": "005930",
-      "price": 273000,
+      "price": 272500,
       "prevClose": 270000,
       "date": "2026-09-29",
       "currency": "KRW"
     },
     {
       "ticker": "017670",
-      "price": 85800,
+      "price": 86200,
       "prevClose": 88200,
       "date": "2026-09-29",
       "currency": "KRW"
     },
     {
       "ticker": "487240",
-      "price": 36305,
+      "price": 36295,
       "prevClose": 36360,
       "date": "2026-09-29",
       "currency": "KRW"
     },
     {
       "ticker": "329180",
-      "price": 430500,
+      "price": 429000,
       "prevClose": 442000,
       "date": "2026-09-29",
       "currency": "KRW"
     },
     {
       "ticker": "009150",
-      "price": 1531000,
+      "price": 1528000,
       "prevClose": 1499000,
       "date": "2026-09-29",
       "currency": "KRW"
