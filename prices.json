@@ -1,134 +1,120 @@
 {
-  "updated": "2026-11-27T03:34:45.044054Z",
+  "updated": "2026-11-27T17:01:22.987009Z",
   "fx": {
-    "USDKRW": 1340.48
+    "USDKRW": 1333.1
   },
   "data": [
     {
       "ticker": "GEV",
-      "price": 715.0,
-      "prevClose": 720.65,
-      "date": "2026-11-25",
+      "price": 734.77,
+      "prevClose": 715.0,
+      "date": "2026-11-27",
       "currency": "USD"
     },
     {
       "ticker": "CRDO",
-      "price": 106.79,
-      "prevClose": 106.46,
-      "date": "2026-11-25",
+      "price": 112.96,
+      "prevClose": 106.79,
+      "date": "2026-11-27",
       "currency": "USD"
     },
     {
       "ticker": "AVGO",
-      "price": 300.86,
-      "prevClose": 301.08,
-      "date": "2026-11-25",
+      "price": 311.26,
+      "prevClose": 300.86,
+      "date": "2026-11-27",
       "currency": "USD"
     },
     {
       "ticker": "DELL",
-      "price": 297.06,
-      "prevClose": 295.28,
-      "date": "2026-11-25",
+      "price": 316.21,
+      "prevClose": 297.06,
+      "date": "2026-11-27",
       "currency": "USD"
     },
     {
       "ticker": "BE",
-      "price": 152.89,
-      "prevClose": 156.41,
-      "date": "2026-11-25",
+      "price": 161.93,
+      "prevClose": 152.89,
+      "date": "2026-11-27",
       "currency": "USD"
     },
     {
       "ticker": "KOP",
-      "price": 30.86,
-      "prevClose": 30.08,
-      "date": "2026-11-25",
+      "price": 31.79,
+      "prevClose": 30.86,
+      "date": "2026-11-27",
       "currency": "USD"
     },
     {
       "ticker": "VMI",
-      "price": 415.78,
-      "prevClose": 407.68,
-      "date": "2026-11-25",
+      "price": 420.11,
+      "prevClose": 415.78,
+      "date": "2026-11-27",
       "currency": "USD"
     },
     {
       "ticker": "ON",
-      "price": 62.48,
-      "prevClose": 61.49,
-      "date": "2026-11-25",
+      "price": 65.42,
+      "prevClose": 62.48,
+      "date": "2026-11-27",
       "currency": "USD"
     },
     {
       "ticker": "COHR",
-      "price": 196.19,
-      "prevClose": 196.24,
-      "date": "2026-11-25",
+      "price": 219.26,
+      "prevClose": 196.19,
+      "date": "2026-11-27",
       "currency": "USD"
     },
     {
       "ticker": "SJ",
-      "price": 68.01,
-      "prevClose": 67.52,
-      "date": "2026-11-26",
+      "price": 68.44,
+      "prevClose": 68.01,
+      "date": "2026-11-27",
       "currency": "CAD"
     },
     {
       "ticker": "010060",
-      "price": 177550,
-      "prevClose": 165400,
-      "date": "2026-11-27",
-      "currency": "KRW"
+      "price": null,
+      "err": "cannot convert float NaN to integer"
     },
     {
       "ticker": "004020",
-      "price": 26700,
-      "prevClose": 26200,
-      "date": "2026-11-27",
-      "currency": "KRW"
+      "price": null,
+      "err": "cannot convert float NaN to integer"
     },
     {
       "ticker": "000660",
-      "price": 1088000,
-      "prevClose": 1033000,
-      "date": "2026-11-27",
-      "currency": "KRW"
+      "price": null,
+      "err": "cannot convert float NaN to integer"
     },
     {
       "ticker": "005930",
-      "price": 177200,
-      "prevClose": 171300,
-      "date": "2026-11-27",
-      "currency": "KRW"
+      "price": null,
+      "err": "cannot convert float NaN to integer"
     },
     {
       "ticker": "017670",
-      "price": 64600,
-      "prevClose": 63670,
-      "date": "2026-11-27",
-      "currency": "KRW"
+      "price": null,
+      "err": "cannot convert float NaN to integer"
     },
     {
       "ticker": "487240",
-      "price": 21505,
+      "price": 21805,
       "prevClose": 20225,
       "date": "2026-11-27",
       "currency": "KRW"
     },
     {
       "ticker": "329180",
-      "price": 247500,
-      "prevClose": 238500,
-      "date": "2026-11-27",
-      "currency": "KRW"
+      "price": null,
+      "err": "cannot convert float NaN to integer"
     },
     {
       "ticker": "009150",
-      "price": 803000,
-      "prevClose": 784000,
-      "date": "2026-11-27",
-      "currency": "KRW"
+      "price": null,
+      "err": "cannot convert float NaN to integer"
     }
   ]
 }
